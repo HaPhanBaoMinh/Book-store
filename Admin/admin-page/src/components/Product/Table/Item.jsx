@@ -11,8 +11,15 @@ export const Item = ({book, count}) => {
 
     const onClickDeleteBook = (e) => {
         dispatch(deleteBook(book._id));
+
+        for( let i = 0; i < book.bookImages.length; i++ ){
+            axios.delete(`http://localhost:5000/api/file/${book.bookImages[i].id}`)
+            // console.log(`http://localhost:5000/api/file/${book.bookImages[i].id}`);
+        }
+
         axios.delete('http://localhost:5000/api/booksList', { data: {
-            id: book._id
+            id: book._id,
+            // img_id: book.bookImages[0].id
         }, header: {} });
     }
 
@@ -21,10 +28,10 @@ export const Item = ({book, count}) => {
 
     return (
         <tr className="tr">
-                 <Link to="/newproduct" className='linkItem' >
+                 <Link to={`/product/update/${book.bookId}`} className='linkItem' >
                     <td className="td" >{count} </td>
                     <td className="td " >
-                            <img src="https://product.hstatic.net/200000123069/product/proposal_ntmnst_1706a93213ea40e397be5bbdaced5977_master.png" height="110px" alt="" />
+                            <img src={`http://localhost:5000/api/image/${book.bookImages[0].filename}`} height="110px" alt="" />
                        
                     </td>
                     <td className="td book-name" > {book.bookName} </td>
@@ -36,6 +43,6 @@ export const Item = ({book, count}) => {
                     <td className="td" >
                             <button className="button cancel" onClick={() => onClickDeleteBook()} >Delete</button>
                     </td>
-                </tr>
+        </tr>
     )
 }

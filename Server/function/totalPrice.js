@@ -5,7 +5,7 @@ const totalPrice = async (cart) => {
     const productData = await booksList.find();
     await productData.map(dataItem => {
         cart.map(cartItem => {
-            if(dataItem.bookId == cartItem.bookId){
+            if(dataItem.bookId === cartItem.bookId){
                 totalPrice += (dataItem.bookPrice.newPrice)*(cartItem.count);
             }
         })

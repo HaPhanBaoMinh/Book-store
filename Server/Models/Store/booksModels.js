@@ -8,8 +8,8 @@ const booksModels = new Schema({
     },
     bookQuantity: Number,
     bookImages: {
-        type: String,
-        default: ""
+        type: Object,
+        default: {}
     },
     bookPrice: {
         oldPrice: {
@@ -20,7 +20,7 @@ const booksModels = new Schema({
             type: Number,
             default: 0
         }
-    },
+    }, 
     bookDescription: {
         type: String,
         default: ''

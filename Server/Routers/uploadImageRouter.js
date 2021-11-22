@@ -13,16 +13,10 @@ const conn = mongoose.createConnection('mongodb+srv://spiderRumAdmin:spiderRumAd
     useUnifiedTopology: true,
 });
 
-// const conn = mongoose.connection;
-const myDB = mongoose.connection.useDb('Spiderrum_Store');
 let gfs;
 
 // read Stream
 conn.once('open', () => {
-    // Init stream
-    // gfs = Grid(conn.db, mongoose.mongo);
-    // gfs.collection('photos');
-    
     gfs = new mongoose.mongo.GridFSBucket(conn.db, {
       bucketName: "photos"
     } )
@@ -93,11 +87,7 @@ uploadImageRouter.get("/image/:filename", (req, res) => {
 //     res.json(req.file)
 // })
 
-uploadImageRouter.post('/file', upload.array("file", 3), (req, res) => {
-  const files = req.files;
-  console.log(req.body);
-  // const imgUrl = `http://localhost:5000/api/file/${req.file.filename}`;
-  // res.send(imgUrl);
+uploadImageRouter.post('/file', upload.array("file", 12), (req, res) => {
   res.send(req.files)
 })
 
@@ -105,7 +95,7 @@ uploadImageRouter.delete('/file/:id', (req, res) => { //file_id
   
   gfs.delete(new mongoose.Types.ObjectId(req.params.id), (err, data) => {
     if (err) return res.status(404).json({ err: err.message });
-    // res.redirect("/");
+    res.redirect("/");
     res.send("Deleted!");
 
   });

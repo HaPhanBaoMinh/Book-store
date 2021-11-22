@@ -11,7 +11,7 @@ export const Table = ({check, status}) => {
 
     const getBookList = async () => {
         axios.get('http://localhost:5000/api/booksList')
-        .then(({data}) => {
+        .then(({data}) => { 
             dispatch(getBookListAction(data));
         })
     };
@@ -21,7 +21,7 @@ export const Table = ({check, status}) => {
     }, []);
     // GetBookList();
     const bookList = useSelector(state => state.bookList);
-    console.log(bookList);
+    // console.log(bookList);
 
     return ( 
         
@@ -39,7 +39,7 @@ export const Table = ({check, status}) => {
 
             <tbody>
             
-            {bookList.map((book, index) =>  <Item book={book} count={index+1} /> ) }
+            {bookList.map((book, index) =>  <Item book={book} count={index+1} key={book._id} /> ) }
            
             </tbody>
         </table>
