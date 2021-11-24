@@ -2,7 +2,7 @@ import React from 'react';
 import "./Styles.css";
 import { Link } from 'react-router-dom';
 import formatCash from '../../../function/formatMoney';
-import { deleteBook } from '../../../actions/BookList';
+import { deleteBook } from '../../../actions/BookList'; 
 import {useDispatch} from "react-redux";
 import axios from 'axios';
 
@@ -21,10 +21,10 @@ export const Item = ({book, count}) => {
             id: book._id,
             // img_id: book.bookImages[0].id
         }, header: {} });
-    }
+    } 
 
 
-
+ 
 
     return (
         <tr className="tr">

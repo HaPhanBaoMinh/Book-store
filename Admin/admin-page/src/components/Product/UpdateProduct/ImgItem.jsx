@@ -1,8 +1,10 @@
 import React from 'react'
 
-export const ImgItem = () => {
+export const ImgItem = ({srcImg}) => {
     return (
-        <img src="https://product.hstatic.net/200000123069/product/proposal_ntmnst_1706a93213ea40e397be5bbdaced5977_master.png" 
+       <div className="imgDiv">
+             <img src={`http://localhost:5000/api/image/${srcImg.filename}`} 
                         alt="" srcset="" height="190px"  />
+       </div>
     )
 }

@@ -2,7 +2,9 @@ import React from 'react';
 import { Item } from './Item';
 import "./Styles.css"
 
-export const Table = ({check, status}) => {
+export const Table = ({check, status, orderList}) => {
+    // console.log(orderList);
+    orderList === undefined ? orderList = [] : orderList = orderList
     return (
         
         <table className="table-list">
@@ -19,25 +21,11 @@ export const Table = ({check, status}) => {
             </thead>
 
             <tbody>
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
-            <Item check={check} status={status} />
+                {/* <Item check={check} status={status} />
+                <Item check={check} status={status} />
+                <Item check={check} status={status} />
+                <Item check={check} status={status} /> */}
+                {orderList.map((orderListItem, index) => <Item check={check} orderListItem={orderListItem} count={index+1} /> )}
                
             </tbody>
         </table>

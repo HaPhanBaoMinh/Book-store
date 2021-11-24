@@ -4,6 +4,7 @@ const totalPrice = require("../function/totalPrice");
 const {confirmOrderItem} = require("../function/comfirmOrder");
 const cancelOrder = require("../Models/HistoryOrder/cancelListModels");
 const {addToCancelList} = require("../controller/cancelListController");
+const checkQuantity = require("../function/checkQuantity");
 
 const getOrderList = async (req, res) => {
     const orderlist = await orderList.find();
@@ -16,12 +17,15 @@ const getOrderList = async (req, res) => {
 
 const createOrderList = async (req, res) => {
     const reqBody = req.body;
+    
+    if(await checkQuantity(reqBody.cart) === -1){
+        res.status(200).json({"Result":"Over quantity"})
+    } 
+
     const total = await totalPrice(reqBody.cart);
-
-    const postOrder = await {...reqBody, total: total}
-
+    const postOrder = await {...reqBody, total: total} 
     const postOrderTotal = await new orderList(postOrder);
-    console.log(postOrder);
+    // console.log(postOrder); 
 
     try {
         await postOrderTotal.save();
@@ -29,6 +33,7 @@ const createOrderList = async (req, res) => {
     } catch (error) {
         res.status(400).send()
     }
+
 }
 
 const updateOrderList = async (req, res) => {
@@ -52,18 +57,21 @@ const deleteOrderList = async (req,res) => {
     }
 }
 
-const confirmOrder = async (req, res) => { //id
-    const id = await req.body.id;
+const confirmOrder = async (req, res) => { //id 
+    const id = await req.params.id;
     const OrderItem = await orderList.findById(id);
-    // console.log(OrderItem)
+    await addToHistory(OrderItem);
+    // // console.log(OrderItem)
     try {
-        await addToHistory(OrderItem);
-        await confirmOrderItem(id, true);
-        // await orderList.findByIdAndDelete(id);
+            // await addToHistory(OrderItem);
+            await confirmOrderItem(id, 1);
+            // await orderList.findByIdAndDelete(id);
         res.status(200).json({"Result":"Confirmed Order"})       
     } catch (error) {
         res.status(400).send();
     }
+    // console.log(OrderItem);
+    // res.send()
 }
 
 const cancelOrderItem = async (req, res) => { //id

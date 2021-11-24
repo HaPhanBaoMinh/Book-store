@@ -6,7 +6,7 @@ import axios from 'axios';
 import { getBookListAction } from '../../../actions/BookList';
 
 
-export const Table = ({check, status}) => {
+export const Table = () => {
     const dispatch = useDispatch();
 
     const getBookList = async () => {
@@ -15,7 +15,7 @@ export const Table = ({check, status}) => {
             dispatch(getBookListAction(data));
         })
     };
-
+ 
     useEffect(() => {
         getBookList();
     }, []);

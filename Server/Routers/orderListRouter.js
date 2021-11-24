@@ -5,7 +5,7 @@ const {updateRevenuemonthly, createNewMonth} = require("../controller/Trading_re
 
 const orderListRouter = express.Router();
 
-orderListRouter.put("/comfirm", confirmOrder); // Test
+orderListRouter.get("/comfirm/:id", confirmOrder); // Test
 orderListRouter.put("/cancel", cancelOrderItem); // Test
 orderListRouter.get("/revenue/date", updateRevenuedayly); // Test
 orderListRouter.get("/revenue/month", updateRevenuemonthly); // Test
@@ -16,4 +16,4 @@ orderListRouter.post("/", createOrderList);
 orderListRouter.put("/", updateOrderList);
 orderListRouter.delete("/", deleteOrderList);
 
-module.exports = orderListRouter;
+module.exports = orderListRouter;  

@@ -4,7 +4,7 @@ const getBookListAction = (data) => {
             type: 'GET_BOOKLIST',
             payload: data
         }
-    } catch (error) {
+    } catch (error) { 
         console.log(error.message);
     }
 }
@@ -20,4 +20,15 @@ const deleteBook = (id) => {
     }
 }
 
-export {getBookListAction, deleteBook}
+const updateBookList = (newbook) => {
+    try {
+        return{
+            type: "UPDATE_BOOKLIST",
+            payload: newbook
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export {getBookListAction, deleteBook, updateBookList}

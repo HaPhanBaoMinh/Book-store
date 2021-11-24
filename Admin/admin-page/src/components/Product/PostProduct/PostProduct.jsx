@@ -58,8 +58,7 @@ export const PostProduct = () => {
             console.log("Sccusset")
         })
 
-        .catch(err => console.log(err))
-        ;
+        .catch(err => console.log(err));
 
       
         // console.log(...formData);
@@ -205,7 +204,7 @@ export const PostProduct = () => {
                     </div>
 
                         <h3 className="details" > images </h3>
-                    <div className="imgList">
+                    <div className="imgList"> 
                             {/* <ImgItem />
                             <ImgItem />
                             <ImgItem />

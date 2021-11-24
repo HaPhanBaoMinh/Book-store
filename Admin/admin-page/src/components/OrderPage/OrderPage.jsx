@@ -1,10 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "./Styles.css"
 import { BsSearch } from "react-icons/bs";
+import {useSelector, useDispatch } from 'react-redux';
 import Table from './Table/Table';
+import axios from 'axios';
+import {getOrderListAction} from "../../actions/OrderList.js"
+
 
 
 export const OrderPage = () => {
+    const dispatch = useDispatch();
+
+    const getOrderList = async () => {
+        axios.get('http://localhost:5000/api/orderList')
+        .then(({data}) => { 
+            dispatch(getOrderListAction(data));
+        })
+    };
+ 
+    useEffect(() => {
+        getOrderList();
+    }, []);
+    // GetBookList(); 
+    const orderList = useSelector(state => state.orderList);
+    console.log(orderList);
+
     return (
         <>
             <div className="oderList">
@@ -18,7 +38,7 @@ export const OrderPage = () => {
                     </div> 
 
                 </div>
-                        <Table check= {true} />
+                        <Table check= {true} orderList={orderList} /> 
                
             </div>
         </>

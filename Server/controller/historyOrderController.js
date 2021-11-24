@@ -6,15 +6,15 @@ const dateNow = require("../function/handleDate");
 const addToHistory = async (body) => {
     const comfirm = {
         orderDate: body.orderDate,
-        orderListItem: body.cart,
+        orderListItem: body.cart, 
         userInfo: body.contactInfo,
         confirmDay: dateNow(),
         total: body.total,
     }
 
-    
+    console.log(comfirm);
 
-    const confirmProduct = new historyOrder(comfirm);
+    const confirmProduct = new confirmList(comfirm);
     try {
         await confirmProduct.save(); 
     } catch (error) {

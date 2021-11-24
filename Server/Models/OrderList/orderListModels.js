@@ -20,7 +20,7 @@ const orderListModels = new Schema({
             {
                 productName: String,
                 count: Number,
-                bookId: String,
+                bookId: String, 
             }
         ]
         // [
@@ -37,8 +37,8 @@ const orderListModels = new Schema({
         // ]
     },
     confirm: {
-        type: Boolean,
-        default: false
+        type: Number,
+        default: 0
     },
     orderDate: {
         type: Object,

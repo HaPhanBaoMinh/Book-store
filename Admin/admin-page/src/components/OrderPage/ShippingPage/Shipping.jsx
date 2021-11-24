@@ -21,7 +21,7 @@ export const Shipping = () => {
                 </div>
                 
                     
-                       <Table status= {true} check={false} />
+                       <Table status= {true} check={false} /> 
                    
                
             </div>

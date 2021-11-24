@@ -32,7 +32,7 @@ const updateBooks = async (req, res) => {
     const updatedBooks = {...req.body, bookImages: req.files};
     try {
         await booksList.findByIdAndUpdate(id, updatedBooks, {new: true});
-        await res.status(200).json({"Result":"Updated successful!"});
+        await res.status(200).json({"Result":"Updated successful!"}); 
         
     } catch (error) {
         res.status(400).send();
@@ -61,7 +61,7 @@ const createBook = async (req, res) => {
     const newBookPost = new booksList(newBook);
     try {
        await newBookPost.save();
-       res.status(200).send(newBook)
+       res.status(200).send(newBook)    
     } catch (error) {
        res.status(404).send(error.message)
     }
