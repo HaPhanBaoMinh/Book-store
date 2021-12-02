@@ -6,7 +6,7 @@ const getBookListAction = (data) => {
         }
     } catch (error) { 
         console.log(error.message);
-    }
+    } 
 }
 
 const deleteBook = (id) => {

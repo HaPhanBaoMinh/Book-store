@@ -1,22 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
-const data = [
-  {name: 'Jan', Revenue: 400}, 
-  {name: 'Feb', Revenue: 20},
-  {name: 'Mar', Revenue: 20},
-  {name: 'Apr', Revenue: 240}, 
-  {name: 'May', Revenue: 290}, 
-  {name: 'Jun', Revenue: 50},
-  {name: 'Aug', Revenue: 300}, 
-  {name: 'Sep', Revenue: 20},
-  {name: 'Oct', Revenue: 60},
-  {name: 'Nov', Revenue: 70}, 
-  {name: 'Dec', Revenue: 290}, ]
+import {useSelector} from "react-redux";
+import update from 'react-addons-update';
 
-export const Chart = () => {
+const data = [
+  {name: "Jan", Revenue: undefined}, 
+  {name: 'Feb', Revenue: undefined},
+  {name: 'Mar', Revenue: undefined},
+  {name: 'Apr', Revenue: undefined}, 
+  {name: 'May', Revenue: undefined}, 
+  {name: 'Jun', Revenue: undefined},
+  {name: 'Aug', Revenue: undefined}, 
+  {name: 'Sep', Revenue: undefined},
+  {name: 'Oct', Revenue: undefined},
+  {name: 'Nov', Revenue: undefined}, 
+  {name: 'Dec', Revenue: undefined}, ]
+
+export const Chart = ({MonthRevenue}) => { 
   return (
     <>
-      <LineChart width={700} height={350} data={data}>
+      <LineChart width={700} height={350} data={MonthRevenue}>
         <Line type="monotone" dataKey="Revenue" stroke="#03a9f4" />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis dataKey="name" />
@@ -27,4 +30,4 @@ export const Chart = () => {
   )
 }
 
-export default Chart;
+export default React.memo(Chart);

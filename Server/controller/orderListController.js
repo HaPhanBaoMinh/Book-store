@@ -7,13 +7,13 @@ const {addToCancelList} = require("../controller/cancelListController");
 const checkQuantity = require("../function/checkQuantity");
 
 const getOrderList = async (req, res) => {
-    const orderlist = await orderList.find();
+    const orderlist = await orderList.find().sort({ "orderDate.year": 'descending',"orderDate.month": 'descending', "orderDate.date": 'descending'});
     try {
         res.status(200).json(orderlist)
     } catch (error) {
         console.log(error.message);
     }
-}
+} 
 
 const createOrderList = async (req, res) => {
     const reqBody = req.body;
@@ -47,7 +47,7 @@ const updateOrderList = async (req, res) => {
     }
 }
 
-const deleteOrderList = async (req,res) => {
+const deleteOrderList = async (req,res) => { 
     const id = req.body.id;
     try {
         await orderList.findByIdAndDelete(id); 
@@ -61,26 +61,21 @@ const confirmOrder = async (req, res) => { //id
     const id = await req.params.id;
     const OrderItem = await orderList.findById(id);
     await addToHistory(OrderItem);
-    // // console.log(OrderItem)
     try {
-            // await addToHistory(OrderItem);
             await confirmOrderItem(id, 1);
-            // await orderList.findByIdAndDelete(id);
         res.status(200).json({"Result":"Confirmed Order"})       
     } catch (error) {
         res.status(400).send();
     }
-    // console.log(OrderItem);
-    // res.send()
 }
 
 const cancelOrderItem = async (req, res) => { //id
-    const id = await req.body.id;
+    const id = await req.params.id;
     const cancelItem = await orderList.findById(id);
     // console.log(cancelItem)  
     try {
-        await addToCancelList(cancelItem);
-        await confirmOrderItem(id, false);
+        await addToCancelList(cancelItem);  
+        await confirmOrderItem(id, -1);
         res.status(200).json({"Result":"Cancel Order"})       
     } catch (error) {
         res.status(400).send();

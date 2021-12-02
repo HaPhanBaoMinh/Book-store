@@ -30,7 +30,7 @@ uploadImageRouter.get("/file/:filename", (req, res, next) => {
         message: "No files available"
       })
     }
-
+ 
     res.status(200).json({
       success: true,
       file: files
@@ -89,12 +89,12 @@ uploadImageRouter.get("/image/:filename", (req, res) => {
 
 uploadImageRouter.post('/file', upload.array("file", 12), (req, res) => {
   res.send(req.files)
-})
+}) 
 
-uploadImageRouter.delete('/file/:id', (req, res) => { //file_id
+uploadImageRouter.delete('/file/:idItem', (req, res) => { //file_id
   
-  gfs.delete(new mongoose.Types.ObjectId(req.params.id), (err, data) => {
-    if (err) return res.status(404).json({ err: err.message });
+  gfs.delete(new mongoose.Types.ObjectId(req.params.idItem), (err, data) => {
+    if (err) return res.status(404).json({ err: err.message }); 
     res.redirect("/");
     res.send("Deleted!");
 

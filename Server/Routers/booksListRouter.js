@@ -8,6 +8,6 @@ const booksListRouter = express.Router();
 booksListRouter.get("/", getAllBooks);
 booksListRouter.put("/", updateBooks);
 booksListRouter.delete("/", deleteBook);
-booksListRouter.post("/", upload.array("file", 3), createBook);
+booksListRouter.post("/", upload.array("file", 3), createBook); 
 
-module.exports = booksListRouter; 
+module.exports = booksListRouter;    

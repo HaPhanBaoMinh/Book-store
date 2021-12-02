@@ -18,9 +18,19 @@ const updateRevenuedayly = async (req, res) => {
     try {
         await sumRevenue.save();
     } catch (error) {
-        console.log(error.message);
+        throw error
     }
     res.status(200).json({totalRevenue: totalRevenue});
 }
 
-module.exports = {updateRevenuedayly};
+const getTodayRevenue = async (req, res) => {
+    const todayRevenue = await daylyRevenueModels.find( {"date.date": dateNow().date} );
+
+    try { 
+        res.status(200).json(todayRevenue);
+    } catch (error) {
+        res.status(400).send();
+    }
+}
+
+module.exports = {updateRevenuedayly, getTodayRevenue};

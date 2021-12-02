@@ -7,23 +7,23 @@ import axios from 'axios';
 import {getOrderListAction} from "../../actions/OrderList.js"
 
 
-
+ 
 export const OrderPage = () => {
     const dispatch = useDispatch();
-
-    const getOrderList = async () => {
-        axios.get('http://localhost:5000/api/orderList')
-        .then(({data}) => { 
-            dispatch(getOrderListAction(data));
-        })
-    };
- 
-    useEffect(() => {
-        getOrderList();
-    }, []);
-    // GetBookList(); 
     const orderList = useSelector(state => state.orderList);
-    console.log(orderList);
+    // console.log(orderList);
+
+    // const getOrderList = async () => {
+    //     axios.get('http://localhost:5000/api/orderList')
+    //     .then(({data}) => { 
+    //         dispatch(getOrderListAction(data));
+    //     })
+    //     .catch(err => {throw err})
+    // };
+ 
+    // useEffect(() => {
+    //     getOrderList();
+    // }, []); 
 
     return (
         <>
@@ -38,7 +38,7 @@ export const OrderPage = () => {
                     </div> 
 
                 </div>
-                        <Table check= {true} orderList={orderList} /> 
+                        <Table check= {true} orderList= {orderList} /> 
                
             </div>
         </>

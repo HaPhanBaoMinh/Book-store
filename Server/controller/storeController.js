@@ -32,7 +32,7 @@ const updateBooks = async (req, res) => {
     const updatedBooks = {...req.body, bookImages: req.files};
     try {
         await booksList.findByIdAndUpdate(id, updatedBooks, {new: true});
-        await res.status(200).json({"Result":"Updated successful!"}); 
+        await res.status(200).json({"Result":"Updated successful!"});  
         
     } catch (error) {
         res.status(400).send();
@@ -40,19 +40,26 @@ const updateBooks = async (req, res) => {
 }
 
 const deleteBook = async (req, res) => {
-    const  id = req.body.id;
-    const  img_id = req.body.img_id;
+    const  id = await req.body.id;
+    const  img_id = await req.body.img_id;
+    console.log(img_id);
    try {
       await booksList.findByIdAndDelete(id);
-      gfs.delete(new mongoose.Types.ObjectId(img_id), (err, data) => {
-        if (err) return res.status(404).json({ err: err.message });
-      });
+
+      img_id.map(img => {
+        gfs.delete(new mongoose.Types.ObjectId(img), (err, data) => {
+            if (err) return res.status(404).json({ err: err.message });
+          });
+      })
+
+     
 
       
       res.status(200).json({result: "Delete successful!" });
    } catch (error) {
+        throw error
       res.status(400).json(error.message);
-   }
+   } 
 } 
 
 const createBook = async (req, res) => {

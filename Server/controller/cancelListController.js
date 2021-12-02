@@ -7,7 +7,7 @@ const addToCancelList = async (body) => {
         orderDate: body.orderDate,
         orderListItem: body.cart,
         userInfo: body.contactInfo,
-        cancelDay: dateNow(),
+        cancelDay: dateNow(), 
         total: body.total,
     }
 

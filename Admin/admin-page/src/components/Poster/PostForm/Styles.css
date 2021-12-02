@@ -16,6 +16,7 @@
   /* background-color: aqua; */
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .postAction {
@@ -44,6 +45,11 @@
   font-weight: 600;
   color: white;
   background-color: #fe4848;
+}
+
+.postAction button:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 .PostForm {

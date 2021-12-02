@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const posterModels = new Schema({
-    poster: {
+    bookImages: {
+        type: Object,
+        default: {}
+    },
+    linkTo: {
         type: String,
         default: ''
-        // [
-        //     {"img1"},
-        //     {"img2"}
-        // ]
     }
 })
 

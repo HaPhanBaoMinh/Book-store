@@ -45,7 +45,7 @@ export const UpdateProduct = () => {
     const handleDeleteImage = (imgId) => {
         setBookData({
             ...bookData,
-            bookImages: bookData.bookImages.filter(image => image.id !== imgId)
+            bookImages: bookData.bookImages.filter(image => image.id !== imgId) 
         })
     }
 

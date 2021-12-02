@@ -1,6 +1,22 @@
 const Poster = require("../Models/Store/posterModels");
+const mongoose = require("mongoose");
 
-const getPosterList = async (req, res) => {
+const conn = mongoose.createConnection('mongodb+srv://spiderRumAdmin:spiderRumAdmin@cluster0.mtbg8.mongodb.net/Spiderrum_Store', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+let gfs;
+
+// read Stream
+conn.once('open', () => {
+    gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+      bucketName: "photos"
+    } )
+});
+
+
+const getPosterList = async (req, res) => { 
     const posterList = await Poster.find();
     const rePosterList = posterList.reverse(); 
     try {
@@ -22,25 +38,31 @@ const updatePosterList = async (req, res) => {
     }
 }
 
-const deletePoster = async (req, res) => {
-    const id = req.body.id;
+const deletePoster = async (req, res) => { //http://localhost:5000/api/posterList/<poster_Id>?imgId=<imgId>
+    const id = req.params.id;
+    const imgId = req.query.imgId;
     try {
+        gfs.delete(new mongoose.Types.ObjectId(imgId), (err, data) => {
+            if (err) return res.status(404).json({ err: err.message });
+        });
         await Poster.findByIdAndDelete(id);
         res.status(200).json({"Result":"Delete successful!"})
     } catch (error) {
         res.status(400).json(error.message);
     }
-}
+    // res.send(imgId);
+} 
 
-const postPoster = async (req, res) => {
-    const newPoster = new Poster(req.body);
+const postPoster = async (req, res) => { 
+    const newPost = await {...req.body, bookImages: req.file}
+    const PosterItem = await new Poster(newPost);
     try {
-        await newPoster.save();
-        res.status(200).json({result: "Create successful!" })
+        await PosterItem.save();
+        res.status(200).json({result: "Create successful!" }) 
      } catch (error) {
-        res.status(404).send(error.message)
+        res.status(404).send(error.message) 
      }
-
+    // res.send(PosterItem) 
 }
 
 module.exports = {getPosterList, updatePosterList, deletePoster, postPoster};

@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 
 const middlewares = [thunk];
 
-const store = createStore(reducers, applyMiddleware(...middlewares));
+const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render( 
     <Provider store={store} >

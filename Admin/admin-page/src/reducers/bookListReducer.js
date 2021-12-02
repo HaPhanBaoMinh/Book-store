@@ -20,7 +20,7 @@ const reducer = (bookList=[], action) => {
                     $set: action.payload
                 }
             })
-            break;  
+            
     
         default:
             return []

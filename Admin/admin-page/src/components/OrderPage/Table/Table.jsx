@@ -1,10 +1,13 @@
-import React from 'react';
-import { Item } from './Item';
+import React, {useState} from 'react';
+import  Item  from './Item';
 import "./Styles.css"
+import { useSelector } from 'react-redux';
 
-export const Table = ({check, status, orderList}) => {
-    // console.log(orderList);
-    orderList === undefined ? orderList = [] : orderList = orderList
+export const Table = () => {
+    const orderList = useSelector(state => state.orderList);
+    
+
+
     return (
         
         <table className="table-list">
@@ -15,18 +18,14 @@ export const Table = ({check, status, orderList}) => {
                 <th className="header">Phone Number</th>
                 <th className="header">Items</th>
                 <th className="header">Total</th>
-                {check == true ? <th className="header check">Check</th> : <> </> }
-                {status == true ? <th className="header check">status</th> : <> </> }
+                <th className="header check">Check</th> 
                 
             </thead>
 
             <tbody>
-                {/* <Item check={check} status={status} />
-                <Item check={check} status={status} />
-                <Item check={check} status={status} />
-                <Item check={check} status={status} /> */}
-                {orderList.map((orderListItem, index) => <Item check={check} orderListItem={orderListItem} count={index+1} /> )}
-               
+              
+                {orderList.map((orderListItem, index) => <Item  orderListItem={orderListItem} count={index+1} key={index} /> )}
+                
             </tbody>
         </table>
     )

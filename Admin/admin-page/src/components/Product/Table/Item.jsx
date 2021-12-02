@@ -12,15 +12,18 @@ export const Item = ({book, count}) => {
     const onClickDeleteBook = (e) => {
         dispatch(deleteBook(book._id));
 
-        for( let i = 0; i < book.bookImages.length; i++ ){
-            axios.delete(`http://localhost:5000/api/file/${book.bookImages[i].id}`)
-            // console.log(`http://localhost:5000/api/file/${book.bookImages[i].id}`);
-        }
+        // LỖI CRASH!!!
+        let img_id = [];
 
+        for( let i = 0; i < book.bookImages.length; i++ ){
+            img_id.push(book.bookImages[i].id)
+        }
+ 
         axios.delete('http://localhost:5000/api/booksList', { data: {
-            id: book._id,
-            // img_id: book.bookImages[0].id
+            id: book._id, 
+            img_id: img_id
         }, header: {} });
+        // console.log(img_id);
     } 
 
 
@@ -45,4 +48,4 @@ export const Item = ({book, count}) => {
                     </td>
         </tr>
     )
-}
+} 

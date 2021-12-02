@@ -9,19 +9,9 @@ import { getBookListAction } from '../../../actions/BookList';
 export const Table = () => {
     const dispatch = useDispatch();
 
-    const getBookList = async () => {
-        axios.get('http://localhost:5000/api/booksList')
-        .then(({data}) => { 
-            dispatch(getBookListAction(data));
-        })
-    };
- 
-    useEffect(() => {
-        getBookList();
-    }, []);
-    // GetBookList();
+    
+
     const bookList = useSelector(state => state.bookList);
-    // console.log(bookList);
 
     return ( 
         

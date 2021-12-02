@@ -34,7 +34,7 @@ export const PostProduct = () => {
                     $set: value
                 }
             }
-        }))
+        })) 
     }
 
     
@@ -59,14 +59,11 @@ export const PostProduct = () => {
         })
 
         .catch(err => console.log(err));
-
       
-        // console.log(...formData);
         await window.location.reload();
 
     }
 
-    
 
     return (
         <div className="post-form" >
@@ -100,7 +97,7 @@ export const PostProduct = () => {
                                 })
                             }}  />
                         </div>
-
+ 
                         <div className="post-form_item book-id">
                            <div className="book-id_layout">
                            <label htmlFor="id"> Book ID: </label>

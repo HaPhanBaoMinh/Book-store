@@ -25,4 +25,16 @@ const createNewMonth = async(req, res) => { // Tạo Object data cho tháng mớ
     }
 }
 
-module.exports = {updateRevenuemonthly, createNewMonth};
+const getMonthRevenue = async (req, res) => {
+    const monthRevenue = await monthRevenueModels.find();
+    console.log(monthRevenue);
+    try { 
+        
+        res.status(200).json(monthRevenue);
+    } catch (error) {
+        res.status(400).send();
+    }
+    // res.send("OK")
+}
+
+module.exports = {updateRevenuemonthly, createNewMonth, getMonthRevenue};

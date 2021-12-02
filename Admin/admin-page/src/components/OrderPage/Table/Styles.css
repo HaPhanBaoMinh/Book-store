@@ -21,6 +21,8 @@ thead {
 
 .tr {
   border-bottom: 1px solid blue;
+  border-left: 0.5px solid blue;
+  border-right: 0.5px solid blue;
   height: 40px;
 }
 
@@ -68,4 +70,10 @@ thead {
 
 .cancel:hover {
   background-color: #cf0000;
+}
+
+.orderItem {
+  display: contents;
+  color: black;
+  text-decoration: none;
 }
