@@ -9,7 +9,6 @@ const formData = new FormData();
 export const PostProduct = () => {
     const location = useLocation()
     const book = location.state;
-    console.log(book);
 
     const [bookData, setBookData] = useState({
         bookName: '',
@@ -108,7 +107,6 @@ export const PostProduct = () => {
                                 })
                             }} />
                            </div>
-                           {/* <button> add image </button> */}
                            <input type="file" id="id" name="file" multiple onChange={(e) => {
 
                                const files = e.target.files;
@@ -117,8 +115,6 @@ export const PostProduct = () => {
                                     formData.append('file', files[i])  
                                 }
 
-                            //    formData.append('file', e.target.files[0])
-                               console.log(...formData);
                            } } />
 
                         
@@ -202,12 +198,7 @@ export const PostProduct = () => {
 
                         <h3 className="details" > images </h3>
                     <div className="imgList"> 
-                            {/* <ImgItem />
-                            <ImgItem />
-                            <ImgItem />
-                            <ImgItem />
-                            <ImgItem />
-                            <ImgItem /> */}
+                   
                     </div>
 
                 </div>

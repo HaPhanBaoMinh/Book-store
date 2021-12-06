@@ -7,6 +7,8 @@ const cron = require("node-cron");
 const path = require("path");
 const methodOverride = require('method-override');
 
+// const ReactDOMServer = require("react-dom/server")
+
 //Router
 const booksListRouter = require("./Routers/booksListRouter");
 const posterListRouter = require("./Routers/posterListRouter");
@@ -18,29 +20,47 @@ const updateRevenuedayly = require("./function/handleRevenue/updateDaylyRevenue"
 const updateRevenuemonthly = require("./function/handleRevenue/updateMonthlyRevenue");
 const createNewMonth = require("./function/handleRevenue/createNewMonth");
 const resetYearRevenue = require("./function/handleRevenue/resetYear");
+const login = require("./controller/Auth/login");
+const getNewAccessetToken = require("./controller/Auth/accessToken");
+const logout = require("./controller/Auth/logout");
 
 
-const multer = require('multer');
-const upload = multer({dest: 'uploads'});
+// const multer = require('multer');
+// const upload = multer({dest: 'uploads'});
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
 
-//Middleware
+//Middleware 
 app.use(bodyParser.json({limit: "30mb", extended: "true" }));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: "true" }));
 app.use(cors());
 app.use(morgan("tiny")); 
 app.use(methodOverride('_method'));
+const verifyToken = require("./middleware/auth")
 
 
-//Routers 
+//API Routers 
 app.use("/api/booksList", express.static(path.join(__dirname, 'uploads')), booksListRouter);
 app.use("/api/orderList", orderListRouter);
 app.use("/api/posterList", posterListRouter);
 app.use("/api/revenue" ,revenue); 
 app.use("/api" ,uploadImageRouter); 
+
+app.use(express.static(path.resolve(__dirname, "../Admin/admin-page/build"))); 
+// Web Routers
+app.use('/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../Admin/admin-page/build', 'index.html'));
+});
+
+// app.post("/login", verifyToken);
+app.post("/login", login);
+app.post("/token", getNewAccessetToken);    
+app.delete("/logout", logout);
+app.post("/demoauth", verifyToken, (req, res) => {
+    res.send("Success1!");
+});
  
 
 //Conect MongoDB

@@ -31,7 +31,7 @@ export const Item = ({book, count}) => {
 
     return (
         <tr className="tr">
-                 <Link to={`/product/update/${book.bookId}`} className='linkItem' >
+                 <Link to={`/admin/product/update/${book.bookId}`} className='linkItem' >
                     <td className="td" >{count} </td>
                     <td className="td " >
                             <img src={`http://localhost:5000/api/image/${book.bookImages[0].filename}`} height="110px" alt="" />

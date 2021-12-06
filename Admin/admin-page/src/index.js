@@ -12,9 +12,9 @@ const middlewares = [thunk];
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
-ReactDOM.render( 
+ReactDOM.hydrate( 
     <Provider store={store} >
         <App /> 
     </Provider>
-
-, document.getElementById("root"));
+ 
+, document.getElementById("root")); 

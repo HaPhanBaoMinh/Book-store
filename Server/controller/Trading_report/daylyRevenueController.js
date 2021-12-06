@@ -24,7 +24,7 @@ const updateRevenuedayly = async (req, res) => {
 }
 
 const getTodayRevenue = async (req, res) => {
-    const todayRevenue = await daylyRevenueModels.find( {"date.date": dateNow().date} );
+    const todayRevenue = await daylyRevenueModels.find( {"date.date": dateNow().date} ); 
 
     try { 
         res.status(200).json(todayRevenue);

@@ -17,7 +17,7 @@ export const Table = () => {
                 <th className="header">Custemer</th>
                 <th className="header">Phone Number</th>
                 <th className="header">Items</th>
-                <th className="header">Total</th>
+                {/* <th className="header">Total</th> */}
                 <th className="header check">Check</th> 
                 
             </thead>

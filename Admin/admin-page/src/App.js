@@ -14,7 +14,9 @@ import axios from 'axios';
 import { getOrderListAction } from './actions/OrderList';
 import { getBookListAction } from './actions/BookList';
 import { getPosterList } from './actions/PosterList';
-
+import LoginPage from './components/LoginPage/LoginPage';
+import ErrorrRoute from './components/LoginPage/404/ErrorrRoute';
+import "./App.css"
 
 
 export const App = () => {
@@ -29,22 +31,25 @@ export const App = () => {
       .catch(err => {throw err})
   };
 
-  const getBookList = async () => {
-    axios.get('http://localhost:5000/api/booksList')
-    .then(({data}) => { 
-        dispatch(getBookListAction(data));
-    })
-}; 
+//   const getBookList = async () => {
+//     axios.get('http://localhost:5000/api/booksList')
+//     .then(({data}) => { 
+//         dispatch(getBookListAction(data));
+//     })
+// }; 
  
 const getPoster = async () => {
   axios.get('http://localhost:5000/api/posterList')
   .then(({data}) => {dispatch(getPosterList(data))} )
   .catch(err => { throw err });
 }
+
+  const accountToken = useSelector(state => state.accountToken).data;
+  console.log(accountToken);
    
 
   useEffect(() => {
-      getBookList()
+      // getBookList()
       getOrderList();
       getPoster();
     }, []); 
@@ -53,20 +58,50 @@ const getPoster = async () => {
     return (
         <div className="App">
               <Router>
-                  <Sidebar />  
-                    <div className="HomePage" > 
-                      <Routes>
-                        <Route path="/" exact element={<HomePage/>} /> 
-                        <Route path="/order/shipping" exact element={<Shipping />} />
-                        <Route path="/product/update/:bookId" exact element={<UpdateProduct />} />
-                        <Route path="/product" exact element={<Product />} />
-                        <Route path="/poster" exact element={<Poster />} />
-                        <Route path="/newproduct" exact element={<PostProduct />} />
-                        <Route path="/order/:id" exact element={<ItemDetail/>} />
-                        <Route path="/order" exact element={<OrderPage/>} />
-                      </Routes>
-                    </div> 
+                          { 
+                !accountToken ?
+                    (<Routes>
+                      <Route path="/login" exact element={<LoginPage/>} /> 
+                      <Route path="/*" exact element={<ErrorrRoute/>} />   
+                    </Routes>) 
+                : 
+                  ( <div className="HomePage" > 
+                    <Sidebar/>  
+                      <div className="HomePage_Content" >
+                        <Routes>
+                            <Route path="/admin" exact element={<HomePage/>} /> 
+                            <Route path="/admin/order/shipping" exact element={<Shipping />} />
+                            <Route path="/admin/product/update/:bookId" exact element={<UpdateProduct />} />
+                            <Route path="/admin/product" exact element={<Product />} />
+                            <Route path="/admin/poster" exact element={<Poster />} />
+                            <Route path="/admin/newproduct" exact element={<PostProduct />} />
+                            <Route path="/admin/order/:id" exact element={<ItemDetail/>} />
+                            <Route path="/admin/order" exact element={<OrderPage/>} />
+                        </Routes>
+                      </div>
+                  </div> )
+                    
+                  }
+              {/* <Routes>
+                  <Route path="/login" exact element={<LoginPage/>} /> 
+              </Routes> */}
+                    {/* <div className="HomePage" > 
+                      <Sidebar/>  
+                        <div className="HomePage_Content" >
+                          <Routes>
+                              <Route path="/admin" exact element={<HomePage/>} /> 
+                              <Route path="/admin/order/shipping" exact element={<Shipping />} />
+                              <Route path="/admin/product/update/:bookId" exact element={<UpdateProduct />} />
+                              <Route path="/admin/product" exact element={<Product />} />
+                              <Route path="/admin/poster" exact element={<Poster />} />
+                              <Route path="/admin/newproduct" exact element={<PostProduct />} />
+                              <Route path="/admin/order/:id" exact element={<ItemDetail/>} />
+                              <Route path="/admin/order" exact element={<OrderPage/>} />
+                          </Routes>
+                        </div>
+                    </div>  */}
               </Router>
+
         </div>
     )
 }

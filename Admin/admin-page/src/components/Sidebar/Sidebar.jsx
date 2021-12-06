@@ -22,7 +22,7 @@ export const Sidebar = () => {
 
             <div className="Sidebar_content">
                 <div className="Sidebar_content-list">
-                    <Link to="/" className="link" > 
+                    <Link to="/admin" className="link" > 
                    <div className="Sidebar_item" component={Link} to='/' >
                        <BsShop className="Siderbar_icon" />
                        <h3> home </h3>
@@ -36,12 +36,12 @@ export const Sidebar = () => {
                         </div>
 
                         <div className="OpenSideBar" id="item" >
-                            <Link to="/product" className="OpenSideBar_item">
+                            <Link to="/admin/product" className="OpenSideBar_item">
                                 <BsInboxes className="Siderbar_icon" />
                                 <h3> product </h3>
                             </Link>
 
-                            <Link to="/newproduct" className="OpenSideBar_item">
+                            <Link to="/admin/newproduct" className="OpenSideBar_item">
                                 <BsClipboardCheck className="Siderbar_icon" />
                                 <h3> New Product </h3>
                             </Link>
@@ -59,12 +59,12 @@ export const Sidebar = () => {
                         </div>
 
                        <div className="OpenSideBar" id="item" >
-                            <Link to="/order" className="OpenSideBar_item">
+                            <Link to="/admin/order" className="OpenSideBar_item">
                                 <BsListCheck className="Siderbar_icon" />
                                 <h3> Order List </h3>
                             </Link>
 
-                            <Link to="/order/shipping" className="OpenSideBar_item">
+                            <Link to="/admin/order/shipping" className="OpenSideBar_item">
                                 <BsTruck className="Siderbar_icon" />
                                 <h3> Shipping </h3>
                             </Link>
@@ -73,14 +73,14 @@ export const Sidebar = () => {
                        </div>
                    </div>
 
-                   <Link className="link" to="/poster" > 
+                   <Link className="link" to="/admin/poster" > 
                         <div className="Sidebar_item">
                             <BsClipboard className="Siderbar_icon" />
                             <h3> poster </h3>
                         </div>
                     </Link>
 
-                   <Link className="link" to="/" > 
+                   <Link className="link" to="/admin" > 
                         <div className="Sidebar_item">
                             <BsTelephone className="Siderbar_icon" />
                             <h3> support </h3>
@@ -88,7 +88,7 @@ export const Sidebar = () => {
                     </Link>
                     
 
-                   <Link className="link" to="/" > 
+                   <Link className="link" to="/admin" > 
                         <div className="Sidebar_item hightLigh">
                             <BsToggleOff className="Siderbar_icon" />
                             <h3> log out </h3>

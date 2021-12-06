@@ -32,7 +32,7 @@ const booksModels = new Schema({
     bookId: {
         type: String,
         default: ''
-    }, 
+    },  
     author: {
         type: String,
         default: ''

@@ -15,11 +15,11 @@ conn.once('open', () => {
       bucketName: "photos"
     } )
 });
-
+ 
 
 
 const getAllBooks = async (req, res) => {
-    try {
+    try { 
         const productData = await booksList.find();
         res.status(200).json(productData);
     } catch (error) {

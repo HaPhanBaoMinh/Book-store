@@ -39,7 +39,7 @@ const orderListModels = new Schema({
     confirm: {
         type: Number,
         default: 0
-    },
+    }, 
     orderDate: {
         type: Object,
         default: dateNow()

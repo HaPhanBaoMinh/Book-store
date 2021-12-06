@@ -41,7 +41,7 @@ function RowItem({index, cartItem, updateSumTotal}) {
         
         <tr className="tr" key={index} >
         <td className="td" > {index + 1} </td>
-        <td className="td" > {cartItem.bookId} </td>
+        <td className="td" > {cartItem.bookId} </td> 
         <td className="td" > {formatCash(Price)} đ </td>
         <td className="td" > {cartItem.count} </td>
         <td className="td" > {formatCash(Total)} đ  </td>

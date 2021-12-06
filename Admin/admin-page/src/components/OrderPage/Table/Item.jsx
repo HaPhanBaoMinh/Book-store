@@ -17,7 +17,7 @@ const Item = ({orderListItem, count}) => {
     
     const handleCancelOnClick = () => {
         dispatch(cancelOrderItemAction(orderListItem)); 
-        axios.get(`http://localhost:5000/api/orderList/cancel/${orderListItem._id}`);
+        axios.get(`http://localhost:5000/api/orderList/cancel/${orderListItem._id}`); 
 
     }
  
@@ -27,13 +27,14 @@ const Item = ({orderListItem, count}) => {
     return (
         <>
             <tr className="tr" style={{ backgroundColor: background }}  >
-                <Link to={`/order/${orderListItem._id}`} className="orderItem" > 
+                <Link to={`/admin/order/${orderListItem._id}`} className="orderItem" > 
                     <td className="td" >{count} </td>
                     <td className="td" > {orderListItem.orderDate.date} /{orderListItem.orderDate.month}/{orderListItem.orderDate.year}</td>
                     <td className="td" > {orderListItem.contactInfo.customerName} </td>
                     <td className="td" > {orderListItem.contactInfo.phoneNumber} </td>
                     <td className="td" > {orderListItem.cart.length} </td>
-                    <td className="td" > { orderListItem.total ? formatCash(orderListItem.total) : 0} đ </td>
+                    {/* <td className="td" > { orderListItem.total ? formatCash(orderListItem.total) : 0} đ </td> */}
+                    </Link> 
  
                     {
                         orderListItem.confirm === 0  ?
@@ -44,8 +45,7 @@ const Item = ({orderListItem, count}) => {
                     }
 
                     
-                </Link> 
-                </tr>
+                </tr> 
         </>
     )
 }

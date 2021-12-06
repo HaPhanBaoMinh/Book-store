@@ -1,12 +1,8 @@
-.HomePage {
-  height: 100vh;
+.HomePage_Content {
   width: 86%;
-  float: right;
-  box-sizing: border-box;
-  padding: 10px;
-  padding-bottom: 30px;
   display: flex;
-  gap: 5px;
-  overflow-y: hidden;
-  background-color: #fffcbb;
+  margin-left: auto;
+  padding: 14px;
+  box-sizing: border-box;
+  padding-right: 20px;
 }
