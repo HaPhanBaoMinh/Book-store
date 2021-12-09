@@ -12,8 +12,39 @@ import { BsShop } from "react-icons/bs";
 import { BsTelephone } from "react-icons/bs";
 import { BsToggleOff } from "react-icons/bs";
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 export const Sidebar = () => {
+
+    function getCookie(name) {
+        var cookieArr = document.cookie.split(";");
+        for(var i = 0; i < cookieArr.length; i++) {
+            var cookiePair = cookieArr[i].split("=");
+            if(name == cookiePair[0].trim()) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        } 
+        return null;
+      }
+
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+
+    const logout = async (e) => {
+        axios.post('http://localhost:5000/auth/logout', {
+            token: getCookie('token')
+          })
+        .then(res => {
+            setCookie('token', '', 1);
+            window.location.assign('http://localhost:5000/login-page');
+        })
+        .catch(rej => console.log("Fail!"))
+    }
+
     return (
         <div className="Sidebar">
             <div className="Sidebar_logo">
@@ -29,7 +60,7 @@ export const Sidebar = () => {
                    </div>
                     </Link> 
 
-                    <div to="/product" className="link hover" > 
+                    <div to="/admin/product" className="link hover" > 
                         <div className="Sidebar_item">
                             <BsBox className="Siderbar_icon" />
                             <h3> product </h3>
@@ -88,12 +119,10 @@ export const Sidebar = () => {
                     </Link>
                     
 
-                   <Link className="link" to="/admin" > 
-                        <div className="Sidebar_item hightLigh">
+                        <div className="Sidebar_item hightLigh" onClick={() => logout() } >
                             <BsToggleOff className="Siderbar_icon" />
                             <h3> log out </h3>
                         </div>
-                   </Link>
 
                 </div>
             </div>

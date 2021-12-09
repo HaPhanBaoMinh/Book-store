@@ -6,6 +6,10 @@ const morgan = require("morgan");
 const cron = require("node-cron");
 const path = require("path");
 const methodOverride = require('method-override');
+const passport = require('passport')
+const cookieParser = require('cookie-parser');
+const verifyToken = require("./middleware/auth");
+
 
 // const ReactDOMServer = require("react-dom/server")
 
@@ -15,53 +19,56 @@ const posterListRouter = require("./Routers/posterListRouter");
 const orderListRouter = require("./Routers/orderListRouter");
 const uploadImageRouter = require("./Routers/uploadImageRouter"); // test
 const revenue = require("./Routers/revenue");
+const authRouter = require("./Routers/authRouter");
+
 
 const updateRevenuedayly = require("./function/handleRevenue/updateDaylyRevenue");
 const updateRevenuemonthly = require("./function/handleRevenue/updateMonthlyRevenue");
 const createNewMonth = require("./function/handleRevenue/createNewMonth");
 const resetYearRevenue = require("./function/handleRevenue/resetYear");
-const login = require("./controller/Auth/login");
-const getNewAccessetToken = require("./controller/Auth/accessToken");
-const logout = require("./controller/Auth/logout");
 
-
-// const multer = require('multer');
-// const upload = multer({dest: 'uploads'});
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
 
 //Middleware 
-app.use(bodyParser.json({limit: "30mb", extended: "true" }));
+app.use(bodyParser.json({limit: "30mb", extended: "false" }));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: "true" }));
 app.use(cors());
 app.use(morgan("tiny")); 
 app.use(methodOverride('_method'));
-const verifyToken = require("./middleware/auth")
+app.use(passport.initialize());
+app.use(cookieParser());
+app.use(express.static(path.resolve(__dirname, "../Admin/admin-page/build"))); 
+app.use(express.static(path.resolve(__dirname, "../login-page/build"))); 
+
 
 
 //API Routers 
+
+app.get('/login-page', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../login-page/build', 'index.html')); 
+}); 
+
+app.use("/auth", authRouter);
+
+app.use(verifyToken);
+
 app.use("/api/booksList", express.static(path.join(__dirname, 'uploads')), booksListRouter);
 app.use("/api/orderList", orderListRouter);
 app.use("/api/posterList", posterListRouter);
 app.use("/api/revenue" ,revenue); 
 app.use("/api" ,uploadImageRouter); 
 
-app.use(express.static(path.resolve(__dirname, "../Admin/admin-page/build"))); 
-// Web Routers
-app.use('/*', (req, res) => {
+app.get('/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../Admin/admin-page/build', 'index.html'));
+    // res.send('hello');
 });
 
-// app.post("/login", verifyToken);
-app.post("/login", login);
-app.post("/token", getNewAccessetToken);    
-app.delete("/logout", logout);
-app.post("/demoauth", verifyToken, (req, res) => {
-    res.send("Success1!");
-});
- 
+app.get("/protect",verifyToken, (req, res) => {
+    res.json('OK')
+})
 
 //Conect MongoDB
 const MONGO_URL = 'mongodb+srv://spiderRumAdmin:spiderRumAdmin@cluster0.mtbg8.mongodb.net'

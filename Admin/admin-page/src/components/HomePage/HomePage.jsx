@@ -33,6 +33,7 @@ const HomePage = () => {
 
     const getOrderList = async () => {
         axios.get('http://localhost:5000/api/orderList')
+        
         .then(({data}) => { 
             dispatch(getOrderListAction(data));
             return(data)
@@ -48,6 +49,7 @@ const HomePage = () => {
 
     const getMOnthRevenue = async () => {
         axios.get("http://localhost:5000/api/revenue/month")
+        
         .then(({data}) =>{
             dispatch(getMonthRevenueAction(data));
             return data   
@@ -74,7 +76,6 @@ const HomePage = () => {
     useEffect(() => {
         getMOnthRevenue();
         getOrderList();
-
 
     }, []);
 

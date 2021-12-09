@@ -27,7 +27,7 @@ const createNewMonth = async(req, res) => { // Tạo Object data cho tháng mớ
 
 const getMonthRevenue = async (req, res) => {
     const monthRevenue = await monthRevenueModels.find();
-    console.log(monthRevenue);
+    // console.log(monthRevenue);
     try { 
         
         res.status(200).json(monthRevenue);

@@ -42,7 +42,7 @@ const updateBooks = async (req, res) => {
 const deleteBook = async (req, res) => {
     const  id = await req.body.id;
     const  img_id = await req.body.img_id;
-    console.log(img_id);
+    // console.log(img_id);
    try {
       await booksList.findByIdAndDelete(id);
 
@@ -64,7 +64,7 @@ const deleteBook = async (req, res) => {
 
 const createBook = async (req, res) => {
     const newBook = await {...req.body, bookImages: req.files, booktags: req.body.booktags }
-    console.log(newBook)
+    // console.log(newBook)
     const newBookPost = new booksList(newBook);
     try {
        await newBookPost.save();

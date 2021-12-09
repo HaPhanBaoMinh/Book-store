@@ -12,7 +12,7 @@ const addToHistory = async (body) => {
         total: body.total,
     }
 
-    console.log(comfirm);
+    // console.log(comfirm);
 
     const confirmProduct = new confirmList(comfirm);
     try {

@@ -3,26 +3,31 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config()
 
 const generateToken = async payload => {
-    const {_id, username, password} = payload
+    const {_id, username, password} = await payload
 
-    const accessToken = jwt.sign({_id, username, password}, process.env.REFRESH_TOKEN_SECRET, {
-        expiresIn: '15s'
+    const accessToken = jwt.sign({_id, username, password}, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: '120s'
     });
     return accessToken
 }
 
 const getNewAccessetToken = async (req, res) => {
-    const refreshToken = await req.body.refreshToken;
+    const refreshToken = req.body.refreshToken;
+
+    // console.log(refreshToken);
 
      if(!refreshToken) return res.sendStatus(401);
-
+ 
     const user = await adminAccount.find({ refreshToken: refreshToken });
 
-    if(!user) return res.sendStatus(403);
+    console.log(user);
+
+    if(!user.length) return res.sendStatus(403);
 
     try {
 
         const tokens = await generateToken(user[0]);
+        // console.log({tokens});
         res.json({tokens});
 
     } catch (error) {

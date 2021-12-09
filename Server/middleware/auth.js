@@ -7,28 +7,31 @@ const checkUserData = async (user) => {
     return reuslt
 }
 
-const verifyToken = async (req, res, next) => {
-    const authHeader = req.header('Authorization');
-    const token = authHeader && authHeader.split(" ")[1];
 
-    if(!token) return res.status(401);
+const verifyToken = async (req, res, next) => {
+    // const authHeader = req.header('Authorization');
+    const tokens =  req.cookies.token;
+    // const tokens = authHeader && authHeader.split(" ")[1];
+
+    // console.log(tokens);
+
+    if(!tokens) { res.status(401); }
 
     try {
-        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        // console.log(decoded);
-        // const result = await checkUserData(decoded);
+        const decoded = jwt.verify(tokens, process.env.ACCESS_TOKEN_SECRET);
+        console.log(decoded);
+        const result = await checkUserData(decoded);
 
-        next();
-        // res.send(result);
+
+        if(result) return next()
         
     } catch (error) {
-        return res.sendStatus(403);
+        // return res.sendStatus(403);
+        return res.redirect("/login-page");
+
     }    
 
-    // const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-
-    // // next();
-    // res.send(decoded)
+   
 }
 
 module.exports = verifyToken

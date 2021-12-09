@@ -11,6 +11,10 @@ export const Table = () => {
 
     const getBookList = async () => {
         axios.get('http://localhost:5000/api/booksList')
+        .then(res => {
+            const resj = res ? res : {data: []}
+            return resj
+          } )
         .then(({data}) => { 
             dispatch(getBookListAction(data));
         })

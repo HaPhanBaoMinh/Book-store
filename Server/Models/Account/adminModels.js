@@ -15,6 +15,14 @@ const adminSchema = new Schema({
     //    
 })
 
+adminSchema.methods.validPassword = function (password) {
+    if (password === this.password) {
+      return true; 
+    } else {
+      return false;
+    }
+  }
+
 
 const myDB = mongoose.connection.useDb('Account');
 const adminAccount = myDB.model("admin", adminSchema);
