@@ -1,17 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./Styles.css";
 import { BsCart2 } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 
 const Topbar = () => {
     const [currentPage, setCurrentPage] = useState(0);
+    const [scroll, setscroll] = useState(false)
 
     const changePage = (num) => {
         setCurrentPage(num);
     }
 
+    useEffect(() => {
+        document.addEventListener('scroll', () => {
+            window.scrollY > 600 ? setscroll(true) : setscroll(false);
+        })
+        return () => {
+            document.removeEventListener('scroll', () => {
+                window.scrollY > 600 ? setscroll(true) : setscroll(false);
+            })
+        }
+    }, [])
+
     return (
-        <div className='Top-bar' >
+        <div className='Top-bar' style={ scroll ? { backgroundColor: 'white' } : { backgroundColor: 'rgba(255, 255, 255, 0)' }} >
             
             <div className="Top-bar_logo">
                 <div className="logo">

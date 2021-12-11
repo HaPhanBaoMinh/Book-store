@@ -1,12 +1,12 @@
 .app {
   /* background-color: aqua; */
-  height: 100vh;
   width: 97vw;
   box-sizing: border-box;
   padding: 0 7%;
   margin: 0 auto;
-  font-family: "Roboto", sans-serif;
   margin-top: 60px;
+  font-family: "Quicksand", sans-serif;
+  overflow: hidden;
 }
 
 .link {

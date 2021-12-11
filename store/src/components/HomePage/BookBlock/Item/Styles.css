@@ -1,0 +1,112 @@
+.item {
+  background-color: white;
+  height: 407px;
+  max-width: 295px;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.item_img img {
+  height: fit-content;
+  max-width: 100%;
+  animation: changeImg 2s ease;
+}
+
+@keyframes changeImg {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.item_img {
+  height: 80%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item_price {
+}
+
+.item_price_name {
+  margin: 0;
+  margin-top: 20px;
+  text-align: center;
+  text-overflow: ellipsis;
+  height: 20px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5c5c5c;
+  transition: 0.3s ease;
+}
+
+.item_price_name:hover {
+  color: #68c9fb;
+  transition: 0.3s ease;
+}
+
+.price-info {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  gap: 11px;
+}
+
+.price {
+  margin: 0;
+  font-weight: 700;
+  font-size: 14px;
+  color: #68c9fb;
+}
+
+.old-price {
+  margin: 0;
+  font-size: 13px;
+  color: #939393;
+  text-decoration: line-through;
+  line-height: 19px;
+  font-weight: 400;
+}
+
+.button_div {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.button_div :hover {
+  cursor: pointer;
+}
+
+.button_div .right {
+  background-image: url("https://cdn.dsmcdn.com/web/production/slick-arrow.svg");
+  background-repeat: no-repeat;
+  display: block;
+  height: 150px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  background-size: contain;
+}
+
+.button_div .left {
+  background-image: url("https://cdn.dsmcdn.com/web/production/slick-arrow.svg");
+  background-repeat: no-repeat;
+  display: block;
+  height: 40px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  transform: rotate(180deg);
+  background-size: contain;
+  margin-bottom: 110px;
+}

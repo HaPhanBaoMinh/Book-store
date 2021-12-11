@@ -1,0 +1,29 @@
+.cart {
+  height: 500px;
+  width: 100%;
+  background-color: aqua;
+  display: flex;
+  margin: 50px 0;
+  overflow: hidden;
+}
+
+.cart_total {
+  height: 100%;
+  width: 25%;
+  background-color: blueviolet;
+}
+
+.cart_info {
+  height: 100%;
+  width: 75%;
+  background-color: rgb(42, 70, 69);
+}
+
+.cart_info h2 {
+  text-align: center;
+}
+
+.cart_list {
+  width: 100%;
+  background-color: chocolate;
+}

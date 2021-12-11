@@ -1,0 +1,33 @@
+.CartItem {
+  height: 100px;
+  background-color: cornflowerblue;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  display: flex;
+  align-content: center;
+}
+
+.item-name img {
+  max-height: 100%;
+}
+
+.item-name {
+  display: inline-block;
+  display: flex;
+  align-items: center;
+}
+
+.cartitem_img {
+  display: inline-block;
+  height: 100%;
+}
+
+.cartitem_name {
+  display: inline-block;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  width: 40%;
+  margin-left: 20px;
+  line-height: 16px;
+}

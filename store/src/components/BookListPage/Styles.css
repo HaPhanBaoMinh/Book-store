@@ -1,0 +1,72 @@
+.book-list {
+  width: 100%;
+  /* background-color: aqua; */
+  box-sizing: border-box;
+  padding-top: 50px;
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.list-side-bar {
+  width: 25%;
+  /* background-color: rgb(82, 82, 136); */
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.list-side-bar h3 {
+  /* text-align: center; */
+  /* margin-left: 10px; */
+}
+
+.list-content {
+  width: 75%;
+  height: 100%;
+  /* background-color: brown; */
+  user-select: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter_content {
+  /* padding: 0 0 0 10px; */
+  box-sizing: border-box;
+}
+
+.by_price {
+}
+
+.filter_content ul {
+  list-style-type: none;
+  padding: 0;
+  color: hsl(0 0% 36%);
+}
+
+.filter_content a {
+  text-decoration: none;
+  color: hsl(0 0% 36%);
+}
+
+.by_price label:hover {
+  cursor: pointer;
+  color: #68c9fb;
+  transition: 0.2s ease;
+}
+
+.by_booktype {
+  margin-bottom: 30px;
+}
+
+.by_booktype li {
+  display: block;
+  box-sizing: border-box;
+  padding: 5px 0;
+  border-bottom: 1px #e7e7e7 dashed;
+}
+
+.by_booktype a:hover {
+  cursor: pointer;
+  color: #68c9fb;
+  transition: 0.2s ease;
+}

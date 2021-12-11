@@ -1,0 +1,38 @@
+.book-grid {
+  width: 100%;
+  height: 100%;
+  /* background-color: brown; */
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 20px;
+}
+
+.book-grid_header {
+  /* text-align: center; */
+  font-size: 25px;
+  font-weight: 700;
+  color: hsl(0 0% 36%);
+  line-height: 30px;
+  margin-left: 50px;
+  display: inline-block;
+}
+
+.sort {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.sort select {
+  margin-right: 90px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid;
+}
+
+.sort select:hover {
+  cursor: pointer;
+}
