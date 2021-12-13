@@ -1,17 +1,38 @@
 import axios from 'axios';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { confirmOrderItemAction, cancelOrderItemAction } from '../../../../actions/OrderList';
 import formatCash from '../../../../function/formatMoney';
 import RowItem from './RowItem';
 import "./Styles.css";
+import {getBookListAction} from "../../../../actions/BookList"
 
 const ItemDetail = () => {
     const {id} = useParams();
-    const orderItem = useSelector(state => state.orderList.find(order => order._id === id));
+    const dispatch = useDispatch();
     const bookList = useSelector((state) => state.bookList);
     const [sumTotal, setsumTotal] = useState(0);
+    
+    const getBookList = async () => {
+        axios.get('http://localhost:5000/api/booksList')
+        .then(res => {
+            const resj = res ? res : {data: []}
+            return resj
+        } )
+        .then(({data}) => { 
+            dispatch(getBookListAction(data));
+        })
+        .then(() => {
+
+        })
+    }; 
+    
+    const orderItem = useSelector(state => state.orderList.find(order => order._id === id));
+
+    useEffect(() => {
+        getBookList()
+    }, [])
 
     const checkPrice = (bookList) => {
         const {bookId, bookPrice} = bookList;
@@ -24,9 +45,6 @@ const ItemDetail = () => {
         setsumTotal(pre => pre + total);
    }
 
-   const dispatch = useDispatch();
-
- 
     const handleConfirmOnClick = () => {
         dispatch(confirmOrderItemAction(orderItem));
         axios.get(`http://localhost:5000/api/orderList/comfirm/${orderItem._id}`);

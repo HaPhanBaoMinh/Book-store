@@ -5,8 +5,8 @@ import "./Styles.css";
 import Button from './Item/Button';
 
 
-const BookBlock = ( {blockHeader} ) => {
-    
+const BookBlock = ( {blockHeader, bookList} ) => { 
+    // console.log(bookList);
     return (
         <>
             <div className="block-header">
@@ -14,17 +14,17 @@ const BookBlock = ( {blockHeader} ) => {
             </div>
             <div className='book-block' >
                 <Carousel show={4} slide={1} swiping={true} rightArrow={ <Button check={1} /> } leftArrow={<Button check={0} />} >
-                    <Item />
-                    <Item />
-                    <Item />
-                    <Item />
-                    <Item />
-                    <Item />
+                        {
+                            bookList ? bookList.map(book => (
+                                <Item book={book} />
+                            )) : <> </>
+                        }
+                
                 </Carousel>
             </div>
             <div className="line"></div>
-        </>
+        </> 
     )
 }
 
-export default BookBlock
+export default React.memo(BookBlock)

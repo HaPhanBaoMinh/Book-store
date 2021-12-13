@@ -30,6 +30,20 @@ export const App = () => {
       })
       .catch(err => {throw err})
   };
+
+  const getBookList = async () => {
+    axios.get('http://localhost:5000/api/booksList')
+    .then(res => {
+        const resj = res ? res : {data: []}
+        return resj
+    } )
+    .then(({data}) => { 
+        dispatch(getBookListAction(data));
+    })
+    .then(() => {
+
+    })
+}; 
  
 const getPoster = async () => {
   axios.get('http://localhost:5000/api/posterList')
@@ -49,7 +63,7 @@ const getPoster = async () => {
   }
 
   const refreshToken = async () => {
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = JSON.parse(localStorage.getItem('refreshToken'));
     console.log('refresh Token');
     axios.post('http://localhost:5000/auth/token', {
       refreshToken: refreshToken
@@ -70,11 +84,8 @@ function getCookie(name) {
   return null;
 }
 
-
-
- 
   useEffect(() => {
-      // getBookList()
+      getBookList()
       getOrderList();
       getPoster();
     }, []); 

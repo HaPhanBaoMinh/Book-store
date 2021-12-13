@@ -5,6 +5,8 @@ const {confirmOrderItem} = require("../function/comfirmOrder");
 const cancelOrder = require("../Models/HistoryOrder/cancelListModels");
 const {addToCancelList} = require("../controller/cancelListController");
 const checkQuantity = require("../function/checkQuantity");
+const handleQuantity = require("../function/handleQuantity");
+
 
 const getOrderList = async (req, res) => {
     const orderlist = await orderList.find().sort({ "orderDate.year": 'descending',"orderDate.month": 'descending', "orderDate.date": 'descending'});
@@ -60,6 +62,8 @@ const deleteOrderList = async (req,res) => {
 const confirmOrder = async (req, res) => { //id 
     const id = await req.params.id;
     const OrderItem = await orderList.findById(id);
+    // console.log(OrderItem);
+    await handleQuantity(OrderItem);
     await addToHistory(OrderItem);
     try {
             await confirmOrderItem(id, 1);

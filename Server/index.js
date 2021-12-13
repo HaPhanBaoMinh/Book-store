@@ -26,6 +26,12 @@ const updateRevenuedayly = require("./function/handleRevenue/updateDaylyRevenue"
 const updateRevenuemonthly = require("./function/handleRevenue/updateMonthlyRevenue");
 const createNewMonth = require("./function/handleRevenue/createNewMonth");
 const resetYearRevenue = require("./function/handleRevenue/resetYear");
+const storeRouter = require("./Routers/storeRouter");
+
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
 
 const app = express();
@@ -44,31 +50,29 @@ app.use(express.static(path.resolve(__dirname, "../Admin/admin-page/build")));
 app.use(express.static(path.resolve(__dirname, "../login-page/build"))); 
 
 
+//STORE PAGE
+app.use('/store', storeRouter);
 
-//API Routers 
-
+//LOGIN PAGE
 app.get('/login-page', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../login-page/build', 'index.html')); 
 }); 
 
 app.use("/auth", authRouter);
 
-app.use(verifyToken);
-
-app.use("/api/booksList", express.static(path.join(__dirname, 'uploads')), booksListRouter);
 app.use("/api/orderList", orderListRouter);
+app.use(verifyToken);
+app.use("/api/booksList", express.static(path.join(__dirname, 'uploads')), booksListRouter);
 app.use("/api/posterList", posterListRouter);
 app.use("/api/revenue" ,revenue); 
 app.use("/api" ,uploadImageRouter); 
 
+//ADMIN PAGE
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../Admin/admin-page/build', 'index.html'));
     // res.send('hello');
 });
 
-app.get("/protect",verifyToken, (req, res) => {
-    res.json('OK')
-})
 
 //Conect MongoDB
 const MONGO_URL = 'mongodb+srv://spiderRumAdmin:spiderRumAdmin@cluster0.mtbg8.mongodb.net'

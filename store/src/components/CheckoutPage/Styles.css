@@ -1,0 +1,145 @@
+.checkout {
+  width: 100%;
+  /* background-color: blue; */
+  font-family: "Quicksand", sans-serif;
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.checkout_info {
+  height: 100%;
+  width: 50%;
+  /* background-color: aquamarine; */
+  box-sizing: border-box;
+  padding: 10px 30px;
+}
+
+.checkout_info .header {
+  display: inline-block;
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
+.checkout_cart {
+  height: 100%;
+  width: 50%;
+  /* background-color: rgb(104, 34, 17); */
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.checkout_info form {
+  height: 100%;
+  width: 100%;
+  /* background-color: blueviolet; */
+}
+
+.checkout input,
+select {
+  display: inline-block;
+  height: 45px;
+  /* width: 100%; */
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 0 0 0 10px;
+  font-size: 14px;
+  border: 1px solid rgba(124, 124, 124, 0.575);
+}
+
+.author-name {
+  width: 100%;
+}
+
+.contact_info {
+  display: flex;
+  gap: 10px;
+}
+
+.author_phone {
+  width: 30%;
+}
+
+.author_email {
+  width: 70%;
+}
+
+.author_address {
+  width: 100%;
+}
+
+.address_info {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.address_info select {
+  width: 33%;
+}
+
+.checout_list {
+  width: 100%;
+  /* background-color: cadetblue; */
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.checkout_item {
+  height: 80px;
+  width: 100%;
+  /* background-color: crimson; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(197, 197, 197);
+}
+
+.item_name {
+  width: 350px;
+  font-size: 14px;
+  margin: 0;
+  font-weight: 400;
+}
+
+.checout_sum {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  height: 50px;
+  border-top: 1px solid;
+  align-items: center;
+  margin-top: 50px;
+  box-sizing: border-box;
+}
+
+.checout_button {
+  height: 50px;
+  /* background-color: aqua; */
+  margin-top: 50px;
+  justify-content: center;
+  display: flex;
+}
+
+.checout_button button {
+  height: 90%;
+  width: 200px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background-color: #338dbc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.checout_button button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

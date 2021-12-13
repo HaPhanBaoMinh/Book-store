@@ -12,15 +12,19 @@ const generateToken = async payload => {
 }
 
 const getNewAccessetToken = async (req, res) => {
-    const refreshToken = req.body.refreshToken;
+    const refreshTokens = await req.body.refreshToken;
 
-    // console.log(refreshToken);
+    // console.log(req.body);
 
-     if(!refreshToken) return res.sendStatus(401);
+
+
+
+     if(!refreshTokens) return res.sendStatus(401);
  
-    const user = await adminAccount.find({ refreshToken: refreshToken });
+    const user = await adminAccount.find({ refreshToken: refreshTokens })
 
-    console.log(user);
+
+    // console.log(user);
 
     if(!user.length) return res.sendStatus(403);
 
@@ -28,10 +32,10 @@ const getNewAccessetToken = async (req, res) => {
 
         const tokens = await generateToken(user[0]);
         // console.log({tokens});
-        res.json({tokens});
+        await res.json({tokens});
 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.sendStatus(403);
     }
 

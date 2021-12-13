@@ -11,5 +11,5 @@ export default combineReducers({
     orderList,
     posterList,
     monthRevenue,
-    accountToken
+    accountToken 
 })

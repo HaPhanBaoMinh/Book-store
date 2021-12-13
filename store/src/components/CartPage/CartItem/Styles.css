@@ -1,10 +1,12 @@
 .CartItem {
   height: 100px;
-  background-color: cornflowerblue;
+  background-color: rgb(252, 252, 252);
   box-sizing: border-box;
   padding: 10px 20px;
   display: flex;
   align-content: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #c0c0c0a1;
 }
 
 .item-name img {
@@ -15,6 +17,7 @@
   display: inline-block;
   display: flex;
   align-items: center;
+  width: 45%;
 }
 
 .cartitem_img {
@@ -27,7 +30,78 @@
   margin: 0;
   font-size: 14px;
   font-weight: 500;
-  width: 40%;
+  width: 100%;
   margin-left: 20px;
   line-height: 16px;
+}
+
+.item_count {
+  display: flex;
+  align-items: center;
+}
+
+.item_count button {
+  height: 25px;
+  outline: none;
+  border: none;
+  width: 25px;
+}
+
+.item_count button:hover {
+  cursor: pointer;
+}
+
+.item_count h3 {
+  padding: 0 10px;
+  font-size: 15px;
+  /* border: solid 1px; */
+  font-weight: 500;
+  margin: 0;
+  height: 30px;
+  line-height: 30px;
+  box-sizing: border-box;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+}
+
+.item_price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.item_price h5 {
+  margin: 0;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.oldprice {
+  text-decoration: line-through;
+}
+
+.total {
+  color: #68c9fb;
+  line-height: 18px;
+  font-weight: 800;
+  font-size: 13px;
+  margin: 0;
+}
+
+.newprice {
+}
+
+.item_price button {
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 20px;
+  margin-top: 7px;
+}
+
+.item_price button:hover {
+  cursor: pointer;
 }

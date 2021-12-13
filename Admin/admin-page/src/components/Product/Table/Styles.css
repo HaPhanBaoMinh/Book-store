@@ -79,4 +79,6 @@ thead {
   width: 315px;
   box-sizing: border-box;
   padding-left: 30px;
+  text-align: left;
+  line-height: 20px;
 }

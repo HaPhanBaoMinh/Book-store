@@ -9,7 +9,7 @@ const orderListModels = new Schema({
         address: {
             province: String, // Tỉnh/TP
             district: String, //Huyện
-            town: String, // Thị trấn
+            ward: String, // Thị trấn
             detailedAddress: String // Số nhà - Đường - Khu phố
         },
         phoneNumber: String,

@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 
 const middlewares = [thunk];
 
-const store = createStore(reducers, applyMiddleware(thunk));
+const store = createStore(reducers, applyMiddleware(thunk)); 
 
 ReactDOM.hydrate( 
     <Provider store={store} >

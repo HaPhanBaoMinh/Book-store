@@ -9,20 +9,20 @@ import { getBookListAction } from '../../../actions/BookList';
 export const Table = () => {
     const dispatch = useDispatch();
 
-    const getBookList = async () => {
-        axios.get('http://localhost:5000/api/booksList')
-        .then(res => {
-            const resj = res ? res : {data: []}
-            return resj
-          } )
-        .then(({data}) => { 
-            dispatch(getBookListAction(data));
-        })
-    }; 
+    // const getBookList = async () => {
+    //     axios.get('http://localhost:5000/api/booksList')
+    //     .then(res => {
+    //         const resj = res ? res : {data: []}
+    //         return resj
+    //       } )
+    //     .then(({data}) => { 
+    //         dispatch(getBookListAction(data));
+    //     })
+    // };  
 
-    useEffect(() => {
-        getBookList()
-      }, []); 
+    // useEffect(() => {
+    //     getBookList()
+    //   }, []); 
 
     const bookList = useSelector(state => state.bookList);
 
