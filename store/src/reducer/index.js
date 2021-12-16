@@ -1,6 +1,13 @@
 import { combineReducers } from "redux";
-import bookListReducer from "./bookListReducer";
+import bookList from "./bookListReducer";
+import posterList from "./posterListReducer";
+import cartList from "./cartListReducer";
+import sumPrice from "./sumPriceReducer";
 
 export default combineReducers({
-    bookListReducer
+    bookList,
+    posterList,
+    cartList,
+    sumPrice
 })
+ 

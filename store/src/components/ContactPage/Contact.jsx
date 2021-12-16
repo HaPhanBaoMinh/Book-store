@@ -7,7 +7,6 @@ const Contact = () => {
     return (
         <div className='contact'>
             <div className="contact_map">
-                <div className='map' dangerouslySetInnerHTML={iframe} />
             </div>
 
             <div className="contact_add">

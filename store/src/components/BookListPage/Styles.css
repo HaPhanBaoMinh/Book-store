@@ -65,7 +65,7 @@
   border-bottom: 1px #e7e7e7 dashed;
 }
 
-.by_booktype a:hover {
+.by_booktype li:hover {
   cursor: pointer;
   color: #68c9fb;
   transition: 0.2s ease;

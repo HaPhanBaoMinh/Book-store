@@ -5,7 +5,6 @@ const reducer = (bookList=[], action) => {
     switch (action.type) {
 
             case "GET_BOOKLIST":
-            // console.log(action.payload);
             return action.payload;
 
             case "DELETE_BOOK":
@@ -23,7 +22,7 @@ const reducer = (bookList=[], action) => {
             
     
         default:
-            return []
+            return bookList
     }
 }   
 

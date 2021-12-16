@@ -1,7 +1,11 @@
 .poster {
-  background-color: blueviolet;
+  background-color: rgba(137, 43, 226, 0);
   width: 98vw;
   max-height: calc(100vh + 80px);
   overflow: hidden;
   margin-top: -60px;
+}
+
+.poster-link {
+  margin: 0 auto;
 }

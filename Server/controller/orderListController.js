@@ -63,10 +63,10 @@ const confirmOrder = async (req, res) => { //id
     const id = await req.params.id;
     const OrderItem = await orderList.findById(id);
     // console.log(OrderItem);
-    await handleQuantity(OrderItem);
+    await handleQuantity(OrderItem); 
     await addToHistory(OrderItem);
     try {
-            await confirmOrderItem(id, 1);
+            // await confirmOrderItem(id, 1);
         res.status(200).json({"Result":"Confirmed Order"})       
     } catch (error) {
         res.status(400).send();

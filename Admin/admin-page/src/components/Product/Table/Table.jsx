@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Item } from './Item';
+import  Item  from './Item';
 import "./Styles.css";
 import {useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -7,25 +7,7 @@ import { getBookListAction } from '../../../actions/BookList';
 
 
 export const Table = () => {
-    const dispatch = useDispatch();
-
-    // const getBookList = async () => {
-    //     axios.get('http://localhost:5000/api/booksList')
-    //     .then(res => {
-    //         const resj = res ? res : {data: []}
-    //         return resj
-    //       } )
-    //     .then(({data}) => { 
-    //         dispatch(getBookListAction(data));
-    //     })
-    // };  
-
-    // useEffect(() => {
-    //     getBookList()
-    //   }, []); 
-
     const bookList = useSelector(state => state.bookList);
-
     return ( 
         
         <table className="table-list"> 
@@ -40,10 +22,8 @@ export const Table = () => {
                 
             </thead>
 
-            <tbody>
-            
-            {bookList.map((book, index) =>  <Item book={book} count={index+1} key={book._id} /> ) }
-           
+            <tbody> 
+                {bookList.map((book, index) =>  <Item book={book} count={index+1} key={book._id} /> ) }
             </tbody>
         </table>
     )

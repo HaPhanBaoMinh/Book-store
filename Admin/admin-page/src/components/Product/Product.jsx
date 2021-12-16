@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "./Styles.css"
 import { BsSearch } from "react-icons/bs";
 import Table from './Table/Table';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 
 export const OrderPage = () => {
@@ -18,7 +20,7 @@ export const OrderPage = () => {
                     </div> 
 
                 </div>
-                        <Table/>
+                        <Table />
                
             </div>
         </>

@@ -5,9 +5,9 @@ const handleQuantity = async (orderItem) => {
         let OrderBook = await booksList.find({bookId: item.bookId})
         OrderBook = OrderBook[0];
 
-       await booksList.findOneAndUpdate({bookId: item.bookId}, {bookQuantity: OrderBook.bookQuantity - 10} );
+       await booksList.findOneAndUpdate({bookId: item.bookId}, {bookQuantity: OrderBook.bookQuantity - item.count} );
        
-    //    console.log(OrderBook);
+    //    console.log(item);
     
     })
 }

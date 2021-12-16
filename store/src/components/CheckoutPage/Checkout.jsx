@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import CheckoutItem from './CheckoutItem';
 import "./Styles.css";
 import axios from "axios";
+import { useSelector } from 'react-redux';
+import formatCash from '../../functions/formatMoney';
 
 const Checkout = () => {
     const [provinces, setProvinces] = useState([]);
@@ -11,7 +13,10 @@ const Checkout = () => {
     const [districtId, setdDstrictId] = useState(0)
 
     const [ward, setWard] = useState([]);
-    const [wardId, setWardId] = useState(0)
+    const [wardId, setWardId] = useState(0);
+
+    const cartList = useSelector(state => state.cartList );
+    const sumPrice = useSelector(state => state.sumPrice);
 
     const [order, setOrder] = useState({
         contactInfo: {
@@ -26,7 +31,7 @@ const Checkout = () => {
             phoneNumber: '',
 
         },
-        cart: []
+        cart: cartList
     });
 
    const getProvinces = () => {
@@ -66,24 +71,54 @@ const Checkout = () => {
        return
    }
 
-  console.log(order)
+   const onSubmit = async (e,order) => {
+        e.preventDefault()
+        axios.post("http://localhost:5000/api/orderList", order)
+        .then(() => console.log('Success!'));
+   }
+
+//   console.log(order)
 
    useEffect(() => {
-    getProvinces()
+    let mount = true
+    if(mount){
+        getProvinces()
+    }
+    return function cleanup(){
+        mount = false
+    }
 }, [])
 
 useEffect(() => {
-    getDistricts()
-    updateAddress( 'province' , checkAddress(provinces, 'province', provincesId));
+    let mount = true
+    if(mount){
+        getDistricts()
+        updateAddress( 'province' , checkAddress(provinces, 'province', provincesId));
+    }
+    return function cleanup(){
+        mount = false
+    }
 }, [provincesId])
 
 useEffect(() => {
-    getWard()
-    updateAddress( 'district' , checkAddress(district, 'district', districtId));
+    let mount = true
+    if(mount){
+        getWard()
+        updateAddress( 'district' , checkAddress(district, 'district', districtId));
+    }
+    return function cleanup(){
+        mount = false
+    }
 }, [districtId])
 
 useEffect(() => {
-    updateAddress( 'ward' , checkAddress(ward, 'ward', wardId));
+    let mount = true
+    if(mount){
+        updateAddress( 'ward' , checkAddress(ward, 'ward', wardId));
+    }
+    return function cleanup(){
+        mount = false
+    }
 }, [wardId])
 
 
@@ -171,7 +206,7 @@ useEffect(() => {
                     </div>
 
                     <div className='checout_button' >
-                        <button type='submit' >
+                        <button type='submit' onClick={(e) => onSubmit(e, order) } >
                         Hoàn tất đơn hàng
                         </button>    
                     </div>
@@ -182,15 +217,16 @@ useEffect(() => {
 
             <div className="checkout_cart">
                 <div className="checout_list">
-                    <CheckoutItem />
-                    <CheckoutItem />
-                    <CheckoutItem />
-                    <CheckoutItem />
+                    {
+                        cartList.map(item => (
+                            <CheckoutItem cartItem={item} key={item._id} />
+                        ))
+                    }
                 </div>
 
                 <div className="checout_sum">
                     <h4> Tổng cộng: </h4>
-                    <h4> 1,000,000đ </h4>
+                    <h4> {formatCash(sumPrice)}đ </h4>
                 </div>
             </div>
         </div>

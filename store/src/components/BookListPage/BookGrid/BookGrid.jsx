@@ -2,11 +2,11 @@ import React from 'react'
 import Item from "../../HomePage/BookBlock/Item/Item";
 import "./Styles.css"
 
-const BookGrid = ({bookList}) => {
+const BookGrid = ({bookList, header}) => {
     return (
         <>
             <div className="sort">
-                <h3 className='book-grid_header' > Tủ sách hướng nghiệp </h3>
+                <h3 className='book-grid_header' > {header} </h3>
                 <select>
                 <option value="new"> Mới nhất </option> 
                 <option value="low-to-hight"> Giá: Tăng dần </option>
@@ -16,8 +16,8 @@ const BookGrid = ({bookList}) => {
             </div>
             <section className="book-grid">
                         {
-                            bookList ? bookList.map(book => (
-                                <Item book={book} />
+                            bookList ? bookList.map((book) => (
+                                <Item book={book} key={book._id} />
                             )) : <> </>
                         }
                 

@@ -1,44 +1,63 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./Styles.css";
 import { RiDeleteBinLine } from "react-icons/ri";
+import formatCash from '../../../functions/formatMoney';
+import { useDispatch } from 'react-redux';
+import { increCount, reduCount, removeCartItem } from '../../../actions/cartListActions';
 
-const CartItem = () => {
-    const [count, setcount] = useState(1)
-    
+const CartItem = ({cartItem, getSumPrice}) => {
+    const [count, setcount] = useState(cartItem.count);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        getSumPrice();
+    })
+
+    const onRemove = (removeItemId) => {
+        dispatch(removeCartItem(removeItemId));
+    }
+
+    const onReduCount = () => {
+        if(count === 1) return 
+        setcount(count => count - 1);
+        dispatch(reduCount(cartItem.bookId));
+    }
+
+    const onIncreCount = () => {
+        setcount(count => count + 1);
+        dispatch(increCount(cartItem.bookId));
+    }
+
     return (
         <div className='CartItem'>
             <div className="item-name">
                 <div className="cartitem_img">
-                    <img src="  //product.hstatic.net/200000123069/product/hrv-combo-it_756d2907cf3043e3b1d736cc7a21a2de_medium.jpg" alt="" />
+                    <img src={`http://localhost:5000/api/image/${cartItem.bookImage}`}  alt="" />
                 </div>
-                    <h4 className='cartitem_name'> 
-Sách Chủ nghĩa Khắc kỷ - Seneca: Những Bức Thư Đạo Đức - Triết học thức hành Đi tìm bình yên trong tâm trí </h4>
+                    <h4 className='cartitem_name'> {cartItem.bookName} </h4>
             </div>
-
+ 
             <div className="item_count">
-                <button onClick={() => {
-                    setcount(count => count + 1)
-                }} > + </button>
-                <h3> {count} </h3>
-                <button onClick={() => 
-
-                    count <= 1 ? count :  setcount(count => count - 1)
-                    
+            <button onClick={() => onReduCount()
                 } > - </button>
+                <h3> {count} </h3>
+               
+                <button onClick={() => onIncreCount()} > + </button>
             </div>
 
             <div className="item_price">
-                <h5 className='newprice' > 295,000đ </h5>
-                <h5 className='oldprice' > (318,000đ) </h5>
+                <h5 className='newprice' > {formatCash(cartItem.bookPrice.newPrice)}đ </h5>
+                <h5 className='oldprice' > ({formatCash(cartItem.bookPrice.oldPrice)}đ) </h5>
             </div>
 
             <div className="item_price">
                 <h5 className='newprice' > Thành tiền: </h5>
-                <h4 className='total' > 295,000đ </h4>
+                <h4 className='total' > {formatCash(cartItem.bookPrice.newPrice * count )}đ </h4>
             </div>
 
             <div className="item_price">
-                <button> <RiDeleteBinLine /> </button>
+                <button> <RiDeleteBinLine className='bin' onClick={() => {
+                    onRemove(cartItem.bookId)
+                }} /> </button>
             </div>
         </div>
     )

@@ -6,7 +6,7 @@ import { deleteBook } from '../../../actions/BookList';
 import {useDispatch} from "react-redux";
 import axios from 'axios';
 
-export const Item = ({book, count}) => {
+const Item = ({book, count}) => {
     const dispatch = useDispatch();
 
     const onClickDeleteBook = (e) => {
@@ -49,3 +49,5 @@ export const Item = ({book, count}) => {
         </tr>
     )
 } 
+
+export default React.memo(Item)

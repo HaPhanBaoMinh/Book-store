@@ -1,12 +1,13 @@
 import React from 'react';
-import "./Styles.css"
+import formatCash from '../../functions/formatMoney';
+import "./Styles.css";
 
-const CheckoutItem = () => {
+const CheckoutItem = ({cartItem}) => {
     return (
         <div className='checkout_item' >
-            <h4 className='item_name' > Sách Chủ nghĩa Khắc kỷ - Seneca: Những Bức Thư Đạo Đức - Triết học thức hành Đi tìm bình yên trong tâm trí </h4>
-            <h4> x4 </h4>
-            <h4> 259,000đ </h4>
+            <h4 className='item_name' > {cartItem.bookName} </h4>
+            <h4>SL: {cartItem.count} </h4>
+            <h4> {formatCash(cartItem.bookPrice.newPrice)}đ </h4>
         </div>
     )
 }

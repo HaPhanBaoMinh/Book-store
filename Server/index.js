@@ -60,12 +60,12 @@ app.get('/login-page', (req, res) => {
 
 app.use("/auth", authRouter);
 
+app.use("/api" ,uploadImageRouter); 
 app.use("/api/orderList", orderListRouter);
-app.use(verifyToken);
+// app.use(verifyToken);
 app.use("/api/booksList", express.static(path.join(__dirname, 'uploads')), booksListRouter);
 app.use("/api/posterList", posterListRouter);
 app.use("/api/revenue" ,revenue); 
-app.use("/api" ,uploadImageRouter); 
 
 //ADMIN PAGE
 app.get('/*', (req, res) => {

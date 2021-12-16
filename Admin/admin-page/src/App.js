@@ -22,11 +22,17 @@ import cron from "react-js-cron";
 
 export const App = () => {
   const dispatch = useDispatch();
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const getOrderList = async () => {
       axios.get('http://localhost:5000/api/orderList')
      .then(({data}) => { 
-           dispatch(getOrderListAction(data)) 
+           setIsLoading(true);
+           dispatch(getOrderListAction(data)) ;
+           return data
+      })
+      .then(() => {
+        setIsLoading(false);
       })
       .catch(err => {throw err})
   };
@@ -38,22 +44,28 @@ export const App = () => {
         return resj
     } )
     .then(({data}) => { 
+        setIsLoading(true);
         dispatch(getBookListAction(data));
+        return data
     })
-    .then(() => {
-
+    .then((data) => {
+        setIsLoading(false);
+        // console.log(data);
     })
 }; 
  
 const getPoster = async () => {
   axios.get('http://localhost:5000/api/posterList')
  .then(({data}) => {
+    setIsLoading(true);
     dispatch(getPosterList(data))
+    return data
   } )
+  .then(data => {
+    setIsLoading(false);
+  })
   .catch(err => { throw err });
 }
-
-  const accountToken = useSelector(state => state.accountToken).data;
 
   function setCookie(cname, cvalue, exdays) {
     const d = new Date();
@@ -73,35 +85,32 @@ const getPoster = async () => {
     .catch(err => console.log(err))
   }
 
-function getCookie(name) {
-  var cookieArr = document.cookie.split(";");
-  for(var i = 0; i < cookieArr.length; i++) {
-      var cookiePair = cookieArr[i].split("=");
-      if(name == cookiePair[0].trim()) {
-          return decodeURIComponent(cookiePair[1]);
-      }
-  } 
-  return null;
-}
-
   useEffect(() => {
-      getBookList()
+    let mounted = true;
+    if(mounted) {
       getOrderList();
       getPoster();
+      getBookList();
+    }
+    return function cleanup() {
+      mounted = false
+  }
     }, []); 
 
     useEffect(() => {
 
         let interval =  setInterval(()=> {
           refreshToken();
-        }, 50000)
+        }, 50000) 
 
-        return ()=> clearInterval(interval)
+        return () => clearInterval(interval)
     }, [])
 
 
     return (
         <div className="App">
+          {
+            isLoading ? <div> loading . . . </div> : (
               <Router>
                 <div className="HomePage" > 
                         <Sidebar/>          
@@ -120,7 +129,9 @@ function getCookie(name) {
                   </div> 
                     
               </Router>
-
+            )
+          }
+            
         </div>
     )
 }

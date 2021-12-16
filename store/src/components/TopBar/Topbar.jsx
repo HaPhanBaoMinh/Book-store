@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import "./Styles.css";
 import { BsCart2 } from "react-icons/bs";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Topbar = () => {
     const [currentPage, setCurrentPage] = useState(0);
@@ -11,16 +12,11 @@ const Topbar = () => {
         setCurrentPage(num);
     }
 
-    useEffect(() => {
-        document.addEventListener('scroll', () => {
-            window.scrollY > 600 ? setscroll(true) : setscroll(false);
-        })
-        return () => {
-            document.removeEventListener('scroll', () => {
-                window.scrollY > 600 ? setscroll(true) : setscroll(false);
-            })
-        }
-    }, [])
+    
+
+    const cartList = useSelector(state => state.cartList);
+
+   
 
     return (
         <div className='Top-bar' style={ scroll ? { backgroundColor: 'white' } : { backgroundColor: 'rgba(255, 255, 255, 0)' }} >
@@ -64,7 +60,7 @@ const Topbar = () => {
                 <div className="Top-bar_cart">
                     <div className="cart_logo">
                         <BsCart2 className='logo' />
-                        <h6>  3  </h6>
+                        <h6>  {cartList.length}  </h6>
                     </div>
                 </div>
             </Link>

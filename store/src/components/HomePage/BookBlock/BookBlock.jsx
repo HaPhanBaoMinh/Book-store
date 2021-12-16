@@ -13,10 +13,10 @@ const BookBlock = ( {blockHeader, bookList} ) => {
                 <h2> {blockHeader} </h2>
             </div>
             <div className='book-block' >
-                <Carousel show={4} slide={1} swiping={true} rightArrow={ <Button check={1} /> } leftArrow={<Button check={0} />} >
+                <Carousel show={4} slide={1} swiping={true} rightArrow={ <Button check={1} /> } leftArrow={<Button check={0} />} responsive={true} >
                         {
-                            bookList ? bookList.map(book => (
-                                <Item book={book} />
+                            bookList ? bookList.map((book, index) => (
+                                <Item book={book} key={book._id} />
                             )) : <> </>
                         }
                 
