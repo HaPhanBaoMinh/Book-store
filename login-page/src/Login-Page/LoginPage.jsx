@@ -31,7 +31,7 @@ const LoginPage = () => {
             setCookie('token', res.token, 1);
             // setCookie('refreshToken', res.refreshToken, 1);
         })
-        .then(res => window.location.assign('http://localhost:5000/admin'))
+        .then(res => window.location.assign('http://localhost:5000/admin/home'))
         .catch(err => console.log(err))
        
     }

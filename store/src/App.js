@@ -26,18 +26,18 @@ const App = () => {
             return data
         })
         .then(data => {
-            setIsLoading(false)
+            setIsLoading(false) 
         }) 
     }
 
     const getPosters = async () => {
-        axios.get("http://localhost:5000/api/posterList")
+        axios.get("http://localhost:5000/store/poster")
         .then(({data}) => {
             setIsLoading(true);
             dispath(getPosterList(data))
             return data
         })
-        .then(data => {
+        .then(() => {
             setIsLoading(false)
         })
     }
@@ -50,9 +50,10 @@ const App = () => {
         return function cleanup() {
             componentMounted.current = false; 
         }
+        
     }, [])
 
-    return (
+    return ( 
         <>
                {
                    isLoading ? <div> loading . . . </div> : (
@@ -60,11 +61,11 @@ const App = () => {
                             <Topbar />
                             <div className="app">
                                     <Routes>
-                                        <Route path="/" element={ <HomePage /> } />
-                                        <Route path="/contact" element={ <Contact /> } />
-                                        <Route path="/booklist" element={ <BookList /> } />
-                                        <Route path="/cart" element={ <Cart /> } />
-                                        <Route path="/checkout" element={ <Checkout /> } />
+                                        <Route path="/book-store/home" element={ <HomePage /> } />
+                                        <Route path="/book-store/contact" element={ <Contact /> } />
+                                        <Route path="/book-store/booklist" element={ <BookList /> } />
+                                        <Route path="/book-store/cart" element={ <Cart /> } />
+                                        <Route path="/book-store/checkout" element={ <Checkout /> } />
                                     </Routes>
                             </div>
                             <Footer />

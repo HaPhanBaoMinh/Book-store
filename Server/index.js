@@ -48,9 +48,15 @@ app.use(passport.initialize());
 app.use(cookieParser());
 app.use(express.static(path.resolve(__dirname, "../Admin/admin-page/build"))); 
 app.use(express.static(path.resolve(__dirname, "../login-page/build"))); 
+app.use(express.static(path.resolve(__dirname, "../store/build"))); 
 
 
 //STORE PAGE
+
+app.get('/book-store/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../store/build', 'index.html')); 
+}); 
+
 app.use('/store', storeRouter);
 
 //LOGIN PAGE
@@ -61,21 +67,21 @@ app.get('/login-page', (req, res) => {
 app.use("/auth", authRouter);
 
 app.use("/api" ,uploadImageRouter); 
+app.use(verifyToken);
 app.use("/api/orderList", orderListRouter);
-// app.use(verifyToken);
 app.use("/api/booksList", express.static(path.join(__dirname, 'uploads')), booksListRouter);
 app.use("/api/posterList", posterListRouter);
 app.use("/api/revenue" ,revenue); 
 
 //ADMIN PAGE
-app.get('/*', (req, res) => {
+app.get('/admin/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../Admin/admin-page/build', 'index.html'));
     // res.send('hello');
 });
 
 
 //Conect MongoDB
-const MONGO_URL = 'mongodb+srv://spiderRumAdmin:spiderRumAdmin@cluster0.mtbg8.mongodb.net'
+const MONGO_URL = process.env.MONGO_URL
 
 mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,

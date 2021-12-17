@@ -73,18 +73,19 @@ const Checkout = () => {
 
    const onSubmit = async (e,order) => {
         e.preventDefault()
-        axios.post("http://localhost:5000/api/orderList", order)
-        .then(() => console.log('Success!'));
+        axios.post("http://localhost:5000/store/orderList", order)
+        .then(() => alert(' Đặt hàng thành công! '));
+
    }
 
-//   console.log(order)
+//   console.log(order) 
 
    useEffect(() => {
     let mount = true
     if(mount){
         getProvinces()
     }
-    return function cleanup(){
+    return function cleanup(){  
         mount = false
     }
 }, [])
@@ -207,7 +208,7 @@ useEffect(() => {
 
                     <div className='checout_button' >
                         <button type='submit' onClick={(e) => onSubmit(e, order) } >
-                        Hoàn tất đơn hàng
+                            Hoàn tất đơn hàng
                         </button>    
                     </div>
 

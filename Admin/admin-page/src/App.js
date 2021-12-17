@@ -116,7 +116,7 @@ const getPoster = async () => {
                         <Sidebar/>          
                           <div className="HomePage_Content" >
                             <Routes>
-                                <Route path="/admin" exact element={<HomePage />} /> 
+                                <Route path="/admin/home" exact element={<HomePage />} /> 
                                 <Route path="/admin/order/shipping" exact element={<Shipping />} />
                                 <Route path="/admin/product/update/:bookId" exact element={<UpdateProduct />} />
                                 <Route path="/admin/product" exact element={<Product />} />

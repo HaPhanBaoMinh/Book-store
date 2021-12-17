@@ -13,9 +13,9 @@ const HomePage = () => {
         <div className='home-page'>
             <Poster />
         
-            <BookBlock key='list1' blockHeader='tủ sách chung' bookList={bookList} /> 
-            <BookBlock key='list2' blockHeader='tủ sách hướng nghiệp' bookList={bookList2} /> 
-            <BookBlock key='list3' blockHeader='tủ sách ngành it' bookList={bookList3} /> 
+            <BookBlock key='list1' header='tủ sách chung' bookList={bookList} /> 
+            <BookBlock key='list2' header='tủ sách hướng nghiệp' bookList={bookList2} /> 
+            <BookBlock key='list3' header='tủ sách ngành it' bookList={bookList3} /> 
             
         </div>
     )

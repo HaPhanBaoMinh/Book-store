@@ -7,12 +7,7 @@ const BookGrid = ({bookList, header}) => {
         <>
             <div className="sort">
                 <h3 className='book-grid_header' > {header} </h3>
-                <select>
-                <option value="new"> Mới nhất </option> 
-                <option value="low-to-hight"> Giá: Tăng dần </option>
-                <option value="hight-to-low"> Giá: Giảm dần </option>
-                <option value="az"> Tên: A - Z </option>
-                </select>
+                
             </div>
             <section className="book-grid">
                         {

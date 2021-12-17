@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import "./Styles.css";
 import CartItem from './CartItem/CartItem'; 
 import { Link } from 'react-router-dom';
@@ -19,6 +19,7 @@ const Cart = () => {
         })
         setsumPrice(sumPrice);
         dispatch(updateSumPrice(sumPrice));
+        
     }
 
     
@@ -44,7 +45,7 @@ const Cart = () => {
                     <h3> {formatCash(sumPrice)}đ </h3>
                 </div>
 
-            <Link className='link' to={'/checkout'} >
+            <Link className='link' to={'/book-store/checkout'} >
                 <button> Thanh toán </button>
             </Link>
             </div>

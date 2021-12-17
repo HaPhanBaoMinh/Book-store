@@ -22,6 +22,8 @@ const BookList = () => {
         setheader(listName)
    }
 
+//    console.log(bookList1)
+
    const onFilter = ( min, max, e) => {
        if(e.target.checked){
            const newBookList = bookList.filter(book => book.bookPrice.newPrice >= min && book.bookPrice.newPrice <= max );

@@ -53,7 +53,7 @@ export const Sidebar = () => {
 
             <div className="Sidebar_content">
                 <div className="Sidebar_content-list">
-                    <Link to="/admin" className="link" > 
+                    <Link to="/admin/home" className="link" > 
                    <div className="Sidebar_item" component={Link} to='/' >
                        <BsShop className="Siderbar_icon" />
                        <h3> home </h3>

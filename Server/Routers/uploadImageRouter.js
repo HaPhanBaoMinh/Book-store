@@ -1,14 +1,16 @@
 const express = require("express");
 const upload = require("../middleware/update");
-const Grid = require("gridfs-stream");
 const mongoose = require("mongoose");
 const fs = require('fs');
-const { connect } = require("http2");
+const verifyToken = require("../middleware/auth");
+require('dotenv').config()
 
 
 uploadImageRouter = express.Router();
 
-const conn = mongoose.createConnection('mongodb+srv://spiderRumAdmin:spiderRumAdmin@cluster0.mtbg8.mongodb.net/Spiderrum_Store', {
+const MONGO_STORE = process.env.MONGO_STORE
+
+const conn = mongoose.createConnection(MONGO_STORE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -17,7 +19,7 @@ let gfs;
 
 // read Stream
 conn.once('open', () => {
-    gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+    gfs = new mongoose.mongo.GridFSBucket(conn.db, { 
       bucketName: "photos"
     } )
 });
@@ -80,14 +82,9 @@ uploadImageRouter.get("/image/:filename", (req, res) => {
     });
 });
 
-// uploadImageRouter.post('/file', upload.single("file"), (req, res) => {
-//      console.log(req.body);
-//     const imgUrl = `http://localhost:5000/api/file/${req.file.filename}`;
-//     // res.send(imgUrl);
-//     res.json(req.file)
-// })
 
-uploadImageRouter.post('/file', upload.array("file", 12), (req, res) => {
+
+uploadImageRouter.post('/file',verifyToken, upload.array("file", 12), (req, res) => {
   res.send(req.files)
 }) 
 

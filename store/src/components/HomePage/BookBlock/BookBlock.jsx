@@ -5,17 +5,17 @@ import "./Styles.css";
 import Button from './Item/Button';
 
 
-const BookBlock = ( {blockHeader, bookList} ) => { 
+const BookBlock = ( {header, bookList} ) => { 
     // console.log(bookList);
     return (
-        <>
+        <> 
             <div className="block-header">
-                <h2> {blockHeader} </h2>
+                <h2> {header} </h2>
             </div>
             <div className='book-block' >
                 <Carousel show={4} slide={1} swiping={true} rightArrow={ <Button check={1} /> } leftArrow={<Button check={0} />} responsive={true} >
                         {
-                            bookList ? bookList.map((book, index) => (
+                            bookList ? bookList.map((book) => (
                                 <Item book={book} key={book._id} />
                             )) : <> </>
                         }
